@@ -3,7 +3,14 @@
  require '../includes/menuNav.php';
 ?>
 
-<form action="../phpScripts/registroScript.php" enctype="multipart/form-data">
+<form method="post" action="../phpScripts/registroScript.php" enctype="multipart/form-data">
+    
+    <div class="form-group">
+        <label for="tipoUsuario">Ud se registrará como:</label>
+        <label class="radio-inline"><input type="radio" name="tipoUsuario" value="cliente" checked>Cliente</label>
+        <label class="radio-inline"><input type="radio" name="tipoUsuario" value="proveedor">Proveedor</label>
+    </div>
+    
     <div class="form-group">
         <label for="nick">Nick:</label>
         <input type="text" class="form-control" name="nick" required>
@@ -35,6 +42,14 @@
         <label for="imagen">Foto de perfil:</label>
         <input type="file" class="form-control" name="imagen">
     </div>
+    
+    <div id="datosEmpresa" class="form-group">
+        <label for="nombreEmpresa">Nombre de la empresa:</label>
+        <input type="text" class="form-control" name="nombreEmpresa">
+        <label for="linkEmpresa">Link:</label>
+        <input type="text" class="form-control" name="linkEmpresa">
+    </div>
+    
     <button type="submit" class="btn btn-default">Registrarme!</button>
 </form>
 
@@ -52,6 +67,17 @@
            }
         });
         
+        $('#datosEmpresa').hide();
+        
+        $('input[type="radio"]').click(function() {
+            if($(this).attr('value') === 'proveedor') {
+                 $('#datosEmpresa').show();           
+            }
+            else{
+                $('#datosEmpresa :input').val('');
+                $('#datosEmpresa').hide();   
+            }
+        });
         
         
     });

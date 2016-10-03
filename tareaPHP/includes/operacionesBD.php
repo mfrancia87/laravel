@@ -18,7 +18,7 @@ function conectarBD(){
 }
 
 //chequeamos que ya no este registrado el mismo mail
-function buscarUsuario($conexionBD, $nick){
+function existeUsuario($conexionBD, $nick){
     $query = "select * from usuario where nick = $nick";
     $result = mysqli_query($conexionBD, $query);
     $cantidadTuplas = mysqli_num_rows($result);
@@ -30,6 +30,6 @@ function buscarUsuario($conexionBD, $nick){
     }
 }
 
-function desconectarBD(){
+function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
 }
