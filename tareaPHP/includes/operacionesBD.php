@@ -151,6 +151,23 @@ function actualizarPreciosPlanes($conexionBD, $precioSilver, $precioGold){
     }
 }
 
+//devuelve un arreglo con los clientes registrados en el sistema
+function listarClientes($conexionBD){
+    $query = "SELECT * FROM usuario";
+    $result = mysqli_query( $conexionBD, $query );
+    $clientes = [];
+    if($result){
+        //devuelvo el array
+        while($tupla = mysqli_fetch_array($result)){
+            array_push($clientes, $tupla);
+        }
+        return $clientes;
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
 }
