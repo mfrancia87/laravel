@@ -134,6 +134,23 @@ function preciosPlanes($conexionBD){
     }
 }
 
+
+function actualizarPreciosPlanes($conexionBD, $precioSilver, $precioGold){
+    $query = "UPDATE suscripcion SET precio = CASE nombre
+                WHEN 'silver' THEN '$precioSilver'
+                WHEN 'gold' THEN '$precioGold'
+                END
+                WHERE nombre IN ('silver', 'gold')";
+    $result = mysqli_query( $conexionBD, $query );
+    if($result){
+        //modificado. redirijo a inicio
+        header( "Location: ../index.php" );
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
 }
