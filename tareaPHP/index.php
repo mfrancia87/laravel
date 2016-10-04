@@ -2,7 +2,7 @@
 
 session_start();
 require 'includes/header.php';
- require 'includes/menuNav.php';
+require 'includes/menuNav.php';
 
  
  

@@ -102,6 +102,38 @@ function actualizarUsuarioByNick($conexionBD, $datos){
     }
 }
 
+//cambiar el plan del usuario
+function cambiarPlanUsuario($conexionBD, $idUsuario, $planNuevo){
+    $query = "UPDATE usuario SET tipoPlan = '$planNuevo' WHERE id = '$idUsuario'";
+    $result = mysqli_query( $conexionBD, $query );
+    if($result){
+        //modificado. redirijo a inicio
+        unset($_SESSION["plan"]);
+        $_SESSION["plan"]=$planNuevo;
+        header( "Location: ../index.php" );
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
+
+//devuelve array con precio de los planes registrados
+function preciosPlanes($conexionBD){
+    $precios = [];
+    $query = "SELECT precio from suscripcion order by precio asc";
+    $result = mysqli_query( $conexionBD, $query );
+    if($result){
+        while($tupla = mysqli_fetch_array($result)){
+            array_push($precios, $tupla[0]);
+        }
+        return $precios;
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
 }

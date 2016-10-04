@@ -19,12 +19,14 @@ if(count(mysqli_num_rows($resultado))==1){
             $esProveedor = $tupla["esProveedor"];
             $nick = $tupla["nick"];
             $idUsuario = $tupla["id"];
+            $plan = $tupla["tipoPlan"];
             session_start();
             $_SESSION["idUsuario"] = $idUsuario;
             $_SESSION["nick"]=$nick;
             $_SESSION["nombre"]=$nombre;
             $_SESSION["email"]=$email;
             $_SESSION["esProveedor"]=$esProveedor;
+            $_SESSION["plan"]=$plan;
             echo "<br>".$_SESSION["nombre"];
             header( "Location: ../index.php" );
         }
