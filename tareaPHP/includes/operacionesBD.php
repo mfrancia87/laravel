@@ -168,6 +168,45 @@ function listarClientes($conexionBD){
     }
 }
 
+
+function listarCategorias($conexionBD){
+    $query = "SELECT * FROM categoria WHERE idCategoriaPadre IS NULL";
+    $result = mysqli_query( $conexionBD, $query );
+    $categorias = [];
+    if($result){
+        //devuelvo el array
+        while($tupla = mysqli_fetch_array($result)){
+            array_push($categorias, $tupla);
+        }
+        return $categorias;
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
+
+function encontrarHijos($conexionBD, $idPadre){
+    $query = "SELECT * FROM categoria WHERE idCategoriaPadre = '$idPadre'";
+    $result = mysqli_query( $conexionBD, $query );
+    $categorias = [];
+    if($result){
+        if(mysqli_num_rows($result)>0){
+            //devuelvo el array
+            while($tupla = mysqli_fetch_array($result)){
+                array_push($categorias, $tupla);
+            }
+            return $categorias;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
 }

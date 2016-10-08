@@ -7,7 +7,7 @@ require 'includes/menuNav.php';
  
  
 if(isset($_SESSION["nombre"])){
-    echo "<h2>Bienvenido ".$_SESSION["nombre"];
+    echo "<h2>Bienvenido ".$_SESSION["nombre"]."</h2>";
     if($_SESSION["esProveedor"]==true){
         echo '<p>Ud es proveedor</p>';
     }

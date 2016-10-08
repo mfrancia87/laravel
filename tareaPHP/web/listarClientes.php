@@ -13,7 +13,7 @@ $listaClientes = listarClientes($conexion);
 ?>
 
 <div class="table-responsive">
-    <table class="table">
+    <table id="clientes" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th>Nick</th>
@@ -26,7 +26,7 @@ $listaClientes = listarClientes($conexion);
           <?php
           foreach ($listaClientes as $cliente) {
           ?>
-            <tr>
+            <tr class="clickable-row">
             <td><?php echo "$cliente[1]" ?></td>
             <td><?php echo "$cliente[4]" ?></td>
             <td><?php echo "$cliente[5]" ?></td>
@@ -37,4 +37,16 @@ $listaClientes = listarClientes($conexion);
           ?>
           
         </tbody>
-</table>
+    </table>
+</div>
+    
+    
+    <script>
+        $(function(){
+            $('#clientes').on('click', '.clickable-row', function(event) {
+                alert("hiciste clic en un cliente");
+              });
+            
+        });
+    
+    </script>
