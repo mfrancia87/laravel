@@ -121,7 +121,7 @@ function cambiarPlanUsuario($conexionBD, $idUsuario, $planNuevo){
 //devuelve array con precio de los planes registrados
 function preciosPlanes($conexionBD){
     $precios = [];
-    $query = "SELECT precio from suscripcion order by precio asc";
+    $query = "SELECT precio from suscripcion order by id asc";
     $result = mysqli_query( $conexionBD, $query );
     if($result){
         while($tupla = mysqli_fetch_array($result)){
