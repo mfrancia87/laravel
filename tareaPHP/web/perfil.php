@@ -20,7 +20,10 @@
         <label for="nick">Nick:</label>
         <input type="text" class="form-control" name="nick" value="<?php echo $datosUsuario["nick"]; ?>" required>
     </div>
-     <div class="form-group">
+    <div class="form-group">
+        <img src="<?php echo $datosUsuario["imagen"] ?>" height="200px">
+    </div>
+    <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" name="email" value="<?php echo $datosUsuario["email"]; ?>"required>
     </div>

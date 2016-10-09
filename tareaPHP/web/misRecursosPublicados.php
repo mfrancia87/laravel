@@ -24,16 +24,16 @@ $conexion = conectarBD();
         </thead>
         <tbody>
           <?php
-          foreach ($listaClientes as $cliente) {
+         // foreach ($listaClientes as $cliente) {
           ?>
             <tr class="clickable-row">
-            <td><?php echo "$cliente[1]" ?></td>
-            <td><?php echo "$cliente[4]" ?></td>
-            <td><?php echo "$cliente[5]" ?></td>
-            <td><?php echo "$cliente[2]" ?></td>
+            <td><?php //echo "$cliente[1]" ?></td>
+            <td><?php// echo "$cliente[4]" ?></td>
+            <td><?php //echo "$cliente[5]" ?></td>
+            <td><?php //echo "$cliente[2]" ?></td>
           </tr>
           <?php
-          }
+          //}
           ?>
           
         </tbody>

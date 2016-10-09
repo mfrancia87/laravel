@@ -9,9 +9,24 @@ $password = filter_input(INPUT_POST, "password");
 $nombre = filter_input(INPUT_POST, "nombre");
 $apellido = filter_input(INPUT_POST, "apellido");
 $fechaNacimiento = date('Y-m-d', strtotime($_POST['fechaNac']));
-$imagen = NULL;
 $nombreEmpresa = filter_input(INPUT_POST, "nombreEmpresa");
 $linkEmpresa = filter_input(INPUT_POST, "linkEmpresa");
+
+if($_FILES["imagen"]["error"] > 0){
+    echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
+}
+else{
+    //$directorio = "C:/wamp64/www/tareaPHP/img/perfil/";
+    $directorio = "../img/perfil/";
+    $temp = explode(".", $_FILES["imagen"]["name"]);
+    $nombreImg = round(microtime(true)) . '.' . end($temp);
+    move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg);
+    /* otros controles de archivo
+    echo "Type: " . $_FILES["imagen"]["type"] . "<br>";
+    echo "Size: " . ($_FILES["imagen"]["size"] / 1024) . " kB<br>";
+    echo "Stored in: " . $_FILES["imagen"]["tmp_name"];
+     */
+}
 
 
 $conexion = conectarBD();
@@ -27,7 +42,7 @@ else{
     //registramos un cliente
         
         $passHash = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO usuario (nick, email, password, nombre, apellido, fechaNacimiento, imagen, esProveedor) VALUES ('$nick', '$email', '$passHash', '$nombre', '$apellido', '$fechaNacimiento', '$imagen', false)";
+        $query = "INSERT INTO usuario (nick, email, password, nombre, apellido, fechaNacimiento, imagen, esProveedor) VALUES ('$nick', '$email', '$passHash', '$nombre', '$apellido', '$fechaNacimiento', '$directorio$nombreImg', false)";
 
         $result = mysqli_query( $conexion, $query );
             if($result){
