@@ -207,6 +207,19 @@ function encontrarHijos($conexionBD, $idPadre){
     }
 }
 
+function agregarRecurso($conexionBD, $datosRecurso){
+    $query = "INSERT INTO recurso (idProveedor, nombre, descripcion, imagen, tipoRecurso, tipoPlan, esDescargable, archivo) VALUES ('$datosRecurso[0]', '$datosRecurso[1]', '$datosRecurso[2]', '$datosRecurso[3]$datosRecurso[4]', '$datosRecurso[5]', '$datosRecurso[6]', '$datosRecurso[7]', '$datosRecurso[8]$datosRecurso[9]')";
+
+    $result = mysqli_query($conexionBD, $query );
+        if($result){
+            //agregado. redirijo a inicio
+            header( "Location: misRecursosPublicados.php" );
+        }else{
+            echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+        }
+}
+
+
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
 }

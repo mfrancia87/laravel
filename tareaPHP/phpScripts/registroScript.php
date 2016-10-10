@@ -17,7 +17,7 @@ if($_FILES["imagen"]["error"] > 0){
 }
 else{
     //$directorio = "C:/wamp64/www/tareaPHP/img/perfil/";
-    $directorio = "../img/perfil/";
+    $directorio = "/tareaPHP/img/perfil/";
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
     move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg);
@@ -57,7 +57,7 @@ else{
         //registramos un proveedor
         
         $passHash = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO usuario (nick, email, password, nombre, apellido, fechaNacimiento, imagen, esProveedor) VALUES ('$nick', '$email', '$passHash', '$nombre', '$apellido', '$fechaNacimiento', '$imagen', true)";
+        $query = "INSERT INTO usuario (nick, email, password, nombre, apellido, fechaNacimiento, imagen, esProveedor) VALUES ('$nick', '$email', '$passHash', '$nombre', '$apellido', '$fechaNacimiento', '$directorio$nombreImg', true)";
 
         $result = mysqli_query( $conexion, $query );
             if($result){

@@ -16,12 +16,15 @@
   <div class="panel-body">
     
   <form method="post" action="../phpScripts/actualizarPerfil.php" enctype="multipart/form-data">
+  <div class="col-lg-4 col-sm-4 col-xs-12">
+        <div class="form-group">
+            <img style="display: block; margin: auto" src="<?php echo $datosUsuario["imagen"] ?>" height="200px" class="img-circle" align="middle">
+        </div>
+    </div>
+  <div class="col-lg-8 col-sm-8 col-xs-12">
     <div class="form-group">
         <label for="nick">Nick:</label>
         <input type="text" class="form-control" name="nick" value="<?php echo $datosUsuario["nick"]; ?>" required>
-    </div>
-    <div class="form-group">
-        <img src="<?php echo $datosUsuario["imagen"] ?>" height="200px">
     </div>
     <div class="form-group">
         <label for="email">Email:</label>
@@ -54,6 +57,9 @@
     ?>
       <button type="submit" class="btn btn-success">Actualizar</button>
       <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="../index.php">Cancelar</a></button>
+  </div>
+    
+      
     </form>
   </div>
 </div>
