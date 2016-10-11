@@ -23,8 +23,7 @@ if($_FILES["imagen"]["error"] > 0){
     echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
 }
 else{
-    //$directorio = "C:/wamp64/www/tareaPHP/img/recurso/";
-    $directorio = "/tareaPHP/img/recurso/";
+    $directorio = "../img/recurso/";
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
     
@@ -40,25 +39,18 @@ if($_FILES["archivo"]["error"] > 0){
     echo "Error: " . $_FILES["archivo"]["error"] . "<br>";
 }
 else{
-    $directorio = "../archivos/recursos/";
+    $directorioArchivo = "../archivos/recursos/";
     $temp = explode(".", $_FILES["archivo"]["name"]);
     $nombreArchivo = round(microtime(true)) . '.' . end($temp);
-    
-    if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $directorio . $nombreArchivo)){
-        echo "<p>SE SUBIO el archivo</p>";
-    }
-    else{
-        echo "<p>No se pudo subir el archivo</p>";
-    }
 }
 
-/* AGREGAR RUTA DE ARCHIVO AL ARRAY DATOSRECURSO
+
 $conexion = conectarBD();
 
 $datosRecurso = [];
-array_push($datosRecurso, $idProveedor, $nombre, $descripcion, $directorio, $nombreImg, $tipoRecurso, $tipoPlan, $esDescargable, $archivo);
+array_push($datosRecurso, $idProveedor, $nombre, $descripcion, $directorio, $nombreImg, $tipoRecurso, $tipoPlan, $esDescargable, $directorioArchivo, $nombreArchivo);
 
-if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg)){
+if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg) && (move_uploaded_file($_FILES["archivo"]["tmp_name"], $directorioArchivo . $nombreArchivo))){
     agregarRecurso($conexion, $datosRecurso);
 }
 else{
@@ -66,6 +58,6 @@ else{
 }
 
 
-desconectarBD($conexionBD);
+desconectarBD($conexion);
  
- */
+ 

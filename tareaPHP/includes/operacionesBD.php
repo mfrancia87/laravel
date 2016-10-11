@@ -207,6 +207,28 @@ function encontrarHijos($conexionBD, $idPadre){
     }
 }
 
+function listarRecursos($conexion, $idProveedor){
+    $query = "SELECT * FROM recurso WHERE idProveedor = '$idProveedor'";
+    $result = mysqli_query( $conexion, $query );
+    $recursos = [];
+    if($result){
+        if(mysqli_num_rows($result)>0){
+            //devuelvo el array
+            while($tupla = mysqli_fetch_array($result)){
+                array_push($recursos, $tupla);
+            }
+            return $recursos;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
+
 function agregarRecurso($conexionBD, $datosRecurso){
     $query = "INSERT INTO recurso (idProveedor, nombre, descripcion, imagen, tipoRecurso, tipoPlan, esDescargable, archivo) VALUES ('$datosRecurso[0]', '$datosRecurso[1]', '$datosRecurso[2]', '$datosRecurso[3]$datosRecurso[4]', '$datosRecurso[5]', '$datosRecurso[6]', '$datosRecurso[7]', '$datosRecurso[8]$datosRecurso[9]')";
 
@@ -218,6 +240,22 @@ function agregarRecurso($conexionBD, $datosRecurso){
             echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
         }
 }
+
+
+function getRecursoById($conexionBD, $idRecurso){
+    $query = "SELECT * FROM recurso WHERE id = '$idRecurso'";
+    $result = mysqli_query($conexionBD, $query) or die("Error en query: ". mysqli_error($conexionBD));
+    $cantidad = mysqli_num_rows($result);
+    if($cantidad==1){
+        $tupla = mysqli_fetch_array($result);
+        return $tupla;
+    }
+    else{
+        return NULL;
+    }
+}
+
+
 
 
 function desconectarBD($conexionBD){
