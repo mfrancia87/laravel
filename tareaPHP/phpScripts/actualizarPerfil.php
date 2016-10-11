@@ -9,18 +9,26 @@ $email = filter_input(INPUT_POST, "email");
 $nombre = filter_input(INPUT_POST, "nombre");
 $apellido = filter_input(INPUT_POST, "apellido");
 $fechaNacimiento = date('Y-m-d', strtotime($_POST['fechaNac']));
-$imagen = NULL;
 $nombreEmpresa = filter_input(INPUT_POST, "nombreEmpresa");
 $linkEmpresa = filter_input(INPUT_POST, "linkEmpresa");
+
+//manejo de imagen
+$directorio = "/tareaPHP/img/perfil/";
+if(isset($_FILES["imagen"])){
+    $temp = explode(".", $_FILES["imagen"]["name"]);
+    $nombreImg = round(microtime(true)) . '.' . end($temp);
+    move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg);
+}
+
 
 $conexion = conectarBD();
 $datosUsuario = [];
 
 if($_SESSION["esProveedor"]==true){
-    array_push($datosUsuario, true, $nick, $email, $nombre, $apellido, $fechaNacimiento, $imagen, $nombreEmpresa, $linkEmpresa, $idUsuario);
+    array_push($datosUsuario, true, $nick, $email, $nombre, $apellido, $fechaNacimiento, $directorio, $nombreImg, $nombreEmpresa, $linkEmpresa, $idUsuario);
 }
 else{
-    array_push($datosUsuario, false, $nick, $email, $nombre, $apellido, $fechaNacimiento, $imagen, $idUsuario);
+    array_push($datosUsuario, false, $nick, $email, $nombre, $apellido, $fechaNacimiento, $directorio, $nombreImg, $idUsuario);
 }
 
 actualizarUsuarioByNick($conexion, $datosUsuario);

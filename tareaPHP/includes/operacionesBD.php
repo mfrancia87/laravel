@@ -59,11 +59,12 @@ function actualizarUsuarioByNick($conexionBD, $datos){
         $nombre = $datos[3];
         $apellido = $datos[4];
         $fechaNacimiento = $datos[5];
-        $imagen = $datos[6];
-        $nombreEmpresa = $datos[7];
-        $linkEmpresa = $datos[8];
-        $idUsuario = $datos[9];
-        $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento', imagen = '$imagen' WHERE id = '$idUsuario'";
+        $directorio = $datos[6];
+        $nombreImg = $datos[7];
+        $nombreEmpresa = $datos[8];
+        $linkEmpresa = $datos[9];
+        $idUsuario = $datos[10];
+        $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento', imagen = '$directorio$nombreImg' WHERE id = '$idUsuario'";
         $result = mysqli_query( $conexionBD, $query );
         if($result){
             //modificado. cambio la tabla proveedor
@@ -88,9 +89,10 @@ function actualizarUsuarioByNick($conexionBD, $datos){
         $nombre = $datos[3];
         $apellido = $datos[4];
         $fechaNacimiento = $datos[5];
-        $imagen = $datos[6];
-        $idUsuario = $datos[7];
-        $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento', imagen = '$imagen' WHERE id = '$idUsuario'";
+        $directorio = $datos[6];
+        $nombreImg = $datos[7];
+        $idUsuario = $datos[8];
+        $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento', imagen = '$directorio$nombreImg' WHERE id = '$idUsuario'";
         $result = mysqli_query( $conexionBD, $query );
         if($result){
             //modificado. redirijo a inicio
@@ -235,7 +237,7 @@ function agregarRecurso($conexionBD, $datosRecurso){
     $result = mysqli_query($conexionBD, $query );
         if($result){
             //agregado. redirijo a inicio
-            header( "Location: misRecursosPublicados.php" );
+            header( "Location: ../web/misRecursosPublicados.php" );
         }else{
             echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
         }
@@ -255,6 +257,17 @@ function getRecursoById($conexionBD, $idRecurso){
     }
 }
 
+function modificarRecurso($conexionBD, $datosRecurso){
+    $query = "UPDATE recurso SET nombre = '$datosRecurso[1]', descripcion = '$datosRecurso[2]', tipoRecurso = '$datosRecurso[3]', tipoPlan = '$datosRecurso[4]', esDescargable = '$datosRecurso[5]' WHERE id = '$datosRecurso[0]'";
+    
+    $result = mysqli_query($conexionBD, $query );
+        if($result){
+            //agregado. redirijo a inicio
+            header( "Location: ../web/misRecursosPublicados.php" );
+        }else{
+            echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+        }
+}
 
 
 

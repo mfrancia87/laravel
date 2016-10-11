@@ -12,12 +12,15 @@ $fechaNacimiento = date('Y-m-d', strtotime($_POST['fechaNac']));
 $nombreEmpresa = filter_input(INPUT_POST, "nombreEmpresa");
 $linkEmpresa = filter_input(INPUT_POST, "linkEmpresa");
 
-if($_FILES["imagen"]["error"] > 0){
-    echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
+
+$directorio = "/tareaPHP/img/perfil/";
+
+//si no selecciona imagen, se le asigna una por defecto
+if(($_FILES["imagen"]["error"] > 0) || (!isset($_FILES["imagen"]))){
+    //echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
+    $nombreImg = "default";
 }
 else{
-    //$directorio = "C:/wamp64/www/tareaPHP/img/perfil/";
-    $directorio = "/tareaPHP/img/perfil/";
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
     move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg);

@@ -20,6 +20,10 @@
         <div class="form-group">
             <img style="display: block; margin: auto" src="<?php echo $datosUsuario["imagen"] ?>" height="200px" class="img-circle" align="middle">
         </div>
+        <div class="form-group">
+          <label for="imagen">Cambiar de foto:</label>
+          <input type="file" class="form-control" name="imagen">
+        </div>
     </div>
   <div class="col-lg-8 col-sm-8 col-xs-12">
     <div class="form-group">

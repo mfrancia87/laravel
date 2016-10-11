@@ -18,12 +18,15 @@ else{
     $esDescargable = false;
 }
 
+
 //manejo de imagen
-if($_FILES["imagen"]["error"] > 0){
-    echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
+$directorio = "../img/recurso/";
+
+if(($_FILES["imagen"]["error"] > 0) || (!isset($_FILES["imagen"]))){
+    //echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
+    $nombreImg = "default";
 }
 else{
-    $directorio = "../img/recurso/";
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
     
@@ -37,6 +40,7 @@ else{
 //manejo de archivo
 if($_FILES["archivo"]["error"] > 0){
     echo "Error: " . $_FILES["archivo"]["error"] . "<br>";
+    header( "refresh:5;url=../index.php" );
 }
 else{
     $directorioArchivo = "../archivos/recursos/";
