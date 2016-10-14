@@ -13,7 +13,7 @@ $nombreEmpresa = filter_input(INPUT_POST, "nombreEmpresa");
 $linkEmpresa = filter_input(INPUT_POST, "linkEmpresa");
 
 //manejo de imagen
-$directorio = "/tareaPHP/img/perfil/";
+$directorio = "../img/perfil/";
 if(isset($_FILES["imagen"])){
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
