@@ -14,10 +14,14 @@ $linkEmpresa = filter_input(INPUT_POST, "linkEmpresa");
 
 //manejo de imagen
 $directorio = "../img/perfil/";
-if(isset($_FILES["imagen"])){
+if(isset($_FILES["imagen"])&& ($_FILES["imagen"]['size'] > 0)){
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
     move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg);
+}
+else{
+    $directorio = NULL;
+    $nombreImg = NULL;
 }
 
 

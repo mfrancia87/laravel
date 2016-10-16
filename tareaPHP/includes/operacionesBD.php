@@ -52,19 +52,67 @@ function getUsuarioByNick($conexionBD, $nick){
 }
 
 function actualizarUsuarioByNick($conexionBD, $datos){
+    
     //si es proveedor
     if($datos[0]==true){
-        $nick = $datos[1];
-        $email = $datos[2];
-        $nombre = $datos[3];
-        $apellido = $datos[4];
-        $fechaNacimiento = $datos[5];
-        $directorio = $datos[6];
-        $nombreImg = $datos[7];
-        $nombreEmpresa = $datos[8];
-        $linkEmpresa = $datos[9];
-        $idUsuario = $datos[10];
+        actualizarProveedor($conexionBD, $datos);
+    }
+    //si es cliente
+    else{
+        actualizarCliente($conexionBD, $datos);
+    }
+}    
+
+//actualiza perfil de cliente
+function actualizarCliente($conexionBD, $datos){
+    $nick = $datos[1];
+    $email = $datos[2];
+    $nombre = $datos[3];
+    $apellido = $datos[4];
+    $fechaNacimiento = $datos[5];
+    $directorio = $datos[6];
+    $nombreImg = $datos[7];
+    $idUsuario = $datos[8];
+    
+    if($directorio==NULL || $nombreImg==NULL){
+        $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento' WHERE id = '$idUsuario'";
+        $result = mysqli_query( $conexionBD, $query );
+        if($result){
+            //modificado. redirijo a inicio
+            header( "Location: ../index.php" );
+        }
+        else{
+            echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+        }
+    }
+    else{
         $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento', imagen = '$directorio$nombreImg' WHERE id = '$idUsuario'";
+        $result = mysqli_query( $conexionBD, $query );
+        if($result){
+            //modificado. redirijo a inicio
+            header( "Location: ../index.php" );
+        }
+        else{
+            echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+        }
+    }  
+}
+
+//actualiza perfil de proveedor
+function actualizarProveedor($conexionBD, $datos){
+    $nick = $datos[1];
+    $email = $datos[2];
+    $nombre = $datos[3];
+    $apellido = $datos[4];
+    $fechaNacimiento = $datos[5];
+    $directorio = $datos[6];
+    $nombreImg = $datos[7];
+    $nombreEmpresa = $datos[8];
+    $linkEmpresa = $datos[9];
+    $idUsuario = $datos[10];
+        
+    if($directorio == NULL || $nombreImg == NULL){
+        $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento' WHERE id = '$idUsuario'";
         $result = mysqli_query( $conexionBD, $query );
         if($result){
             //modificado. cambio la tabla proveedor
@@ -83,20 +131,19 @@ function actualizarUsuarioByNick($conexionBD, $datos){
         }
     }
     else{
-        //si es cliente
-        $nick = $datos[1];
-        $email = $datos[2];
-        $nombre = $datos[3];
-        $apellido = $datos[4];
-        $fechaNacimiento = $datos[5];
-        $directorio = $datos[6];
-        $nombreImg = $datos[7];
-        $idUsuario = $datos[8];
         $query = "UPDATE usuario SET nick = '$nick', email = '$email', nombre = '$nombre', apellido = '$apellido', fechaNacimiento = '$fechaNacimiento', imagen = '$directorio$nombreImg' WHERE id = '$idUsuario'";
         $result = mysqli_query( $conexionBD, $query );
         if($result){
-            //modificado. redirijo a inicio
-            header( "Location: ../index.php" );
+            //modificado. cambio la tabla proveedor
+            $query2 = "UPDATE proveedor SET nombreEmpresa = '$nombreEmpresa', linkEmpresa = '$linkEmpresa' WHERE idUsuario = '$idUsuario'";
+            $result2 = mysqli_query( $conexionBD, $query2 );
+            if($result2){
+                //modificado. redirijo a index
+                header( "Location: ../index.php" );
+            }
+            else{
+                echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+            }
         }
         else{
             echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
@@ -155,21 +202,48 @@ function actualizarPreciosPlanes($conexionBD, $precioSilver, $precioGold){
 
 //devuelve un arreglo con los clientes registrados en el sistema
 function listarClientes($conexionBD){
-    $query = "SELECT * FROM usuario";
+    $query = "SELECT * FROM usuario WHERE esProveedor = false";
     $result = mysqli_query( $conexionBD, $query );
     $clientes = [];
     if($result){
-        //devuelvo el array
-        while($tupla = mysqli_fetch_array($result)){
-            array_push($clientes, $tupla);
+        if(mysqli_num_rows($result)>0){
+            //devuelvo el array
+            while($tupla = mysqli_fetch_array($result)){
+                array_push($clientes, $tupla);
+            }
+            return $clientes;
         }
-        return $clientes;
+        else{
+            return NULL;
+        }
     }
     else{
         echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
     }
 }
 
+
+//devuelve un arreglo con los proveedores registrados en el sistema
+function listarProveedores($conexionBD){
+    $query = "SELECT * FROM usuario WHERE esProveedor = true";
+    $result = mysqli_query( $conexionBD, $query );
+    $proveedores = [];
+    if($result){
+        if(mysqli_num_rows($result)>0){
+            //devuelvo el array
+            while($tupla = mysqli_fetch_array($result)){
+                array_push($proveedores, $tupla);
+            }
+            return $proveedores;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
 
 function listarCategorias($conexionBD){
     $query = "SELECT * FROM categoria WHERE idCategoriaPadre IS NULL";
@@ -226,7 +300,7 @@ function listarRecursos($conexion, $idProveedor){
         }
     }
     else{
-        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexion);
     }
 }
 

@@ -7,14 +7,14 @@ require '../includes/operacionesBD.php';
 
 $conexion = conectarBD();
 
-$listaClientes = listarClientes($conexion);
+$listaProveedores = listarProveedores($conexion);
 
 
 ?>
 
 <div class="table-responsive">
     <?php
-        if($listaClientes != NULL){
+        if($listaProveedores != NULL){
     ?>
     <table id="clientes" class="table table-bordered table-hover">
         <thead>
@@ -27,13 +27,13 @@ $listaClientes = listarClientes($conexion);
         </thead>
         <tbody>
           <?php
-          foreach ($listaClientes as $cliente) {
+          foreach ($listaProveedores as $proveedor) {
           ?>
             <tr class="clickable-row">
-            <td><?php echo "$cliente[1]" ?></td>
-            <td><?php echo "$cliente[4]" ?></td>
-            <td><?php echo "$cliente[5]" ?></td>
-            <td><?php echo "$cliente[2]" ?></td>
+            <td><?php echo "$proveedor[1]" ?></td>
+            <td><?php echo "$proveedor[4]" ?></td>
+            <td><?php echo "$proveedor[5]" ?></td>
+            <td><?php echo "$proveedor[2]" ?></td>
           </tr>
           <?php
           }
@@ -44,18 +44,7 @@ $listaClientes = listarClientes($conexion);
     <?php
         }
         else{
-            echo "<h3>Aún no se ha registrado ningún cliente</h3>";
+            echo "<h3>Aún no se ha registrado ningún proveedor</h3>";
         }
     ?>
 </div>
-    
-    
-    <script>
-        $(function(){
-            $('#clientes').on('click', '.clickable-row', function(event) {
-                alert("hiciste clic en un cliente");
-              });
-            
-        });
-    
-    </script>
