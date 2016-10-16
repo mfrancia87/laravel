@@ -51,6 +51,27 @@ function getUsuarioByNick($conexionBD, $nick){
     }
 }
 
+//devuelve un usuario(buscado por su id)
+function getUsuarioById($conexionBD, $id){
+    $query = "SELECT * from usuario WHERE id='$id'";
+    $result = mysqli_query($conexionBD, $query) or die("Error en query: ". mysqli_error($conexionBD));
+    $cantidad = mysqli_num_rows($result);
+    if($cantidad==1){
+        $tupla = mysqli_fetch_array($result);
+        if($tupla["esProveedor"]==true){
+            $idUsuario = $tupla["id"];
+            $query = "select * from proveedor where idUsuario = $idUsuario";
+            $result = mysqli_query($conexionBD, $query);
+            $tuplaProveedor = mysqli_fetch_array($result);
+            $tupla = array_merge($tupla, $tuplaProveedor);
+        }
+        return $tupla;
+    }
+    else{
+        return NULL;
+    }
+}
+
 function actualizarUsuarioByNick($conexionBD, $datos){
     
     //si es proveedor

@@ -23,6 +23,7 @@ $listaProveedores = listarProveedores($conexion);
             <th>Nombre</th>
             <th>Apellido</th>
             <th>E-mail</th>
+            <th>Ver detalles</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@ $listaProveedores = listarProveedores($conexion);
             <td><?php echo "$proveedor[4]" ?></td>
             <td><?php echo "$proveedor[5]" ?></td>
             <td><?php echo "$proveedor[2]" ?></td>
+            <td><a href="verProveedorConRecursos.php?id=<?php echo $proveedor[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
           </tr>
           <?php
           }
