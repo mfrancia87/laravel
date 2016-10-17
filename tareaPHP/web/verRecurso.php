@@ -18,7 +18,7 @@ if($recurso != NULL){
     <div class="panel-heading">Recurso: <strong><?php echo "$recurso[1]" ?> </strong></div>
   <div class="panel-body">
     
-  <form method="post" action="../phpScripts/actualizarRecurso.php" enctype="multipart/form-data">
+  <form method="post" action="../phpScripts/comprarRecurso.php">
   
   <div class="col-lg-4 col-sm-4 col-xs-12">
         <div class="form-group">
@@ -42,9 +42,24 @@ if($recurso != NULL){
         <label for="tipoPlan">Tipo plan:</label>
         <input type="text" class="form-control" name="tipoPlan" value="<?php echo $recurso[6]; ?>" readonly>
     </div>
-  
-      
+    <input name="idRecurso" type="hidden" value="<?php echo $recurso[0]; ?>">
+    <input name="idProveedor" type="hidden" value="<?php echo $recurso[1]; ?>">
+    <?php
+        if(!empty($idProveedor)){
+    ?>
       <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="verProveedorConRecursos.php?id=<?php echo $idProveedor; ?>">Volver</a></button>
+    <?php
+        }else{
+    ?>
+      <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="listarRecursos.php">Volver</a></button>
+    <?php
+      }
+      if($_SESSION["esProveedor"]==false && $_SESSION["idUsuario"]!=1){
+    ?>
+      <button type="submit" class="btn btn-success">Obtener recurso</button>     
+    <?php
+      }
+    ?>
   </div>
     
       

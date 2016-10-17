@@ -304,6 +304,7 @@ function encontrarHijos($conexionBD, $idPadre){
     }
 }
 
+//lista los recursos de determinado proveedor
 function listarRecursos($conexion, $idProveedor){
     $query = "SELECT * FROM recurso WHERE idProveedor = '$idProveedor'";
     $result = mysqli_query( $conexion, $query );
@@ -325,6 +326,61 @@ function listarRecursos($conexion, $idProveedor){
     }
 }
 
+//lista los recursos obtenidos por determinado cliente
+function listarRecursosObtenidos($conexion, $idCliente){
+    $query = "SELECT idRecurso FROM recursoscliente WHERE idUsuario = '$idCliente'";
+    $result = mysqli_query( $conexion, $query );
+    $listaIds = [];
+    $recursos = [];
+    $i = 0;
+    if($result){
+        if(mysqli_num_rows($result)>0){
+            //devuelvo el array
+            while($tupla = mysqli_fetch_array($result)){
+                array_push($listaIds, $tupla);
+            }
+            return obtenerRecursosDeLista($conexion, $listaIds);
+        }
+        else{
+            return NULL;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexion);
+    }
+}
+
+function obtenerRecursosDeLista($conexion, $listaIds){
+    $listaRecursos = [];
+    foreach ($listaIds as $id) {
+        $recurso = getRecursoById($conexion, $id[0]);
+        array_push($listaRecursos, $recurso);
+    }
+    return $listaRecursos;
+}
+
+
+//lista todos los recursos del sistema
+function listarTodosRecursos($conexion){
+    $query = "SELECT * FROM recurso";
+    $result = mysqli_query( $conexion, $query );
+    $recursos = [];
+    if($result){
+        if(mysqli_num_rows($result)>0){
+            //devuelvo el array
+            while($tupla = mysqli_fetch_array($result)){
+                array_push($recursos, $tupla);
+            }
+            return $recursos;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexion);
+    }
+}
 
 function agregarRecurso($conexionBD, $datosRecurso){
     $query = "INSERT INTO recurso (idProveedor, nombre, descripcion, imagen, tipoRecurso, tipoPlan, esDescargable, archivo) VALUES ('$datosRecurso[0]', '$datosRecurso[1]', '$datosRecurso[2]', '$datosRecurso[3]$datosRecurso[4]', '$datosRecurso[5]', '$datosRecurso[6]', '$datosRecurso[7]', '$datosRecurso[8]$datosRecurso[9]')";
@@ -362,6 +418,19 @@ function modificarRecurso($conexionBD, $datosRecurso){
         }else{
             echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
         }
+}
+
+
+function comprarRecurso($conexionBD, $idCliente, $idRecurso, $idProveedor){
+    $query = "INSERT INTO recursoscliente (idUsuario, idRecurso, idProveedor) VALUES ('$idCliente', '$idRecurso', '$idProveedor')";
+
+    $result = mysqli_query($conexionBD, $query);
+    if($result){
+        //agregado. redirijo a inicio
+        header( "Location: ../web/misRecursosObtenidos.php" );
+    }else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
 }
 
 

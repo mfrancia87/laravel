@@ -23,6 +23,7 @@ $listaClientes = listarClientes($conexion);
             <th>Nombre</th>
             <th>Apellido</th>
             <th>E-mail</th>
+            <th>Ver detalles</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@ $listaClientes = listarClientes($conexion);
             <td><?php echo "$cliente[4]" ?></td>
             <td><?php echo "$cliente[5]" ?></td>
             <td><?php echo "$cliente[2]" ?></td>
+            <td><a href="verClienteConRecursos.php?id=<?php echo $cliente[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
           </tr>
           <?php
           }
@@ -50,12 +52,3 @@ $listaClientes = listarClientes($conexion);
 </div>
     
     
-    <script>
-        $(function(){
-            $('#clientes').on('click', '.clickable-row', function(event) {
-                alert("hiciste clic en un cliente");
-              });
-            
-        });
-    
-    </script>

@@ -42,6 +42,14 @@ if($datosProveedor != NULL){
         <label for="apellido">Apellido:</label>
         <input type="text" class="form-control" name="apellido" value="<?php echo $datosProveedor[5]; ?>" readonly>
     </div>
+    <div class="form-group">
+        <label for="nombreEmpresa">Nombre de la empresa:</label>
+        <input type="text" class="form-control" name="nombreEmpresa" value="<?php echo $datosProveedor[11]; ?>" readonly>
+    </div>
+    <div class="form-group">
+        <label for="linkEmpresa">Link de la empresa:</label>
+        <input type="text" class="form-control" name="linkEmpresa" value="<?php echo $datosProveedor[12]; ?>" readonly>
+    </div>
   
       
     <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="listarProveedores.php">Volver</a></button>
@@ -52,6 +60,9 @@ if($datosProveedor != NULL){
   </div>
 </div>
 
+<div class="panel panel-info">
+        <div class="panel-heading">Recursos adquiridos por <strong><?php echo "$datosProveedor[1]" ?> </strong></div>
+        <div class="panel-body">
 <div class="table-responsive">
     <?php
         if($recursosProveedor != NULL){
@@ -84,13 +95,23 @@ if($datosProveedor != NULL){
           
         </tbody>
     </table>
+ </div>
+</div>
+</div>
     <?php
         }
         else{
+    ?>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Recursos subidos por <strong><?php echo "$datosProveedor[1]" ?> </strong></div>
+        <div class="panel-body">
+        <?php
             echo "<h3>"."$datosProveedor[1]"." aún no ha agregado ningún recurso</h3>";
         }
-    ?>
-</div>
+        ?>
+        </div>
+    </div>
+
 <?php
 }
 else{

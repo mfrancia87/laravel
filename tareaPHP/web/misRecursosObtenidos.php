@@ -7,8 +7,8 @@ require '../includes/operacionesBD.php';
 
 $conexion = conectarBD();
 
-$idProveedor = $_SESSION["idUsuario"];
-$listaRecursos = listarRecursos($conexion, $idProveedor);
+$idCliente = $_SESSION["idUsuario"];
+$listaRecursos = listarRecursosObtenidos($conexion, $idCliente);
 
 
 ?>
@@ -24,7 +24,7 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
             <th>Descripción</th>
             <th>Tipo de recurso</th>
             <th>Para plan:</th>
-            <th>Editar</th>
+            <th>Ver más</th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
             <td><?php echo "$recurso[3]" ?></td>
             <td><?php echo "$recurso[5]" ?></td>
             <td><?php echo "$recurso[6]" ?></td>
-            <td><a href="editarRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
           </tr>
           <?php
             }
@@ -45,7 +45,7 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
           
         </tbody>
     </table>
- </div>
+</div>
     <?php
         }
         else{
@@ -53,14 +53,9 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
         <div class="panel panel-info">
             <div class="panel-heading">No se encontraron recursos</div>
             <div class="panel-body">
-                <h1>Usted no ha publicado recursos aún</h1>
+                <h3>Usted no ha obtenido recursos aún</h3>
             </div>
         </div>
     <?php
         }
     ?>
-
-
-<div class="form-group">
-    <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="../web/crearRecurso.php">Crear nuevo recurso</a></button>
-</div>
