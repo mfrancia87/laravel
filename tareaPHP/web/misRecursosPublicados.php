@@ -64,3 +64,6 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
 <div class="form-group">
     <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="../web/crearRecurso.php">Crear nuevo recurso</a></button>
 </div>
+
+<?php
+require '../includes/footer.php';

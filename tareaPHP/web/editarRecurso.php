@@ -67,4 +67,7 @@ else{
     echo "No hay nada";
 }
 
+
+require '../includes/footer.php';
+
 desconectarBD($conexion);

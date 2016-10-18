@@ -28,3 +28,6 @@ $preciosPlanes = preciosPlanes($conexion);
     </form>
   </div>
 </div>
+
+<?php
+require '../includes/footer.php';

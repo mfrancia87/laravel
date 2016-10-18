@@ -50,5 +50,6 @@ $listaClientes = listarClientes($conexion);
         }
     ?>
 </div>
-    
-    
+
+<?php
+require '../includes/footer.php';

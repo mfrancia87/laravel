@@ -1,3 +1,7 @@
+<?php
+require "loginModal.php";
+?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" style="font-family: rockwell;">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,6 +17,7 @@
             
             <?php
                 if(!isset($_SESSION["nombre"])){    //si es visitante
+                    
             ?>  
                 <li><a href="/tareaPHP/web/listarRecursos.php">Ver recursos</a></li>
                 </ul>
@@ -27,6 +32,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/tareaPHP/web/registro.php">Registro</a></li>
                     <li><a href="/tareaPHP/web/login.php">Login</a></li>
+                    <li><a data-toggle="modal" data-target="#modal-login">Login</a></li>
                 </ul>
             <?php
                 }
@@ -128,6 +134,45 @@
         </div>
     </div>
 </nav>
+
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h3 class="modal-title" id="modal-login-label">Login</h3>
+                <p>Ingrese su nombre de usuario y contraseña:</p>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="../phpScripts/login.php">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="nick">Nick:</label>
+                        <input type="text" class="form-control" name="nick" required autofocus>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="pass">Contraseña:</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="float: right;">Login</button>`
+                </form> 
+                
+            </div>
+        </div>
+    </div>
+</div> <!-- modal -->
+
+
+<!-- script para el modal -->
+                <script>
+                        $(function(){
+                                $('#modal-login').on('click', function(e){
+                                        e.preventDefault();
+                                        $( '#' + $(this).data('modal-id') ).modal();
+                                });
+                        });
+                </script>
 
 <style>
 

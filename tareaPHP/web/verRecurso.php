@@ -15,7 +15,7 @@ if($recurso != NULL){
 ?>
 
 <div class="panel panel-info">
-    <div class="panel-heading">Recurso: <strong><?php echo "$recurso[1]" ?> </strong></div>
+    <div class="panel-heading">Recurso: <strong><?php echo "$recurso[2]" ?> </strong></div>
   <div class="panel-body">
     
   <form method="post" action="../phpScripts/comprarRecurso.php">
@@ -54,7 +54,7 @@ if($recurso != NULL){
       <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="listarRecursos.php">Volver</a></button>
     <?php
       }
-      if($_SESSION["esProveedor"]==false && $_SESSION["idUsuario"]!=1){
+      if(isset($_SESSION["esProveedor"]) && $_SESSION["esProveedor"]==false && $_SESSION["idUsuario"]!=1){
     ?>
       <button type="submit" class="btn btn-success">Obtener recurso</button>     
     <?php
@@ -72,3 +72,6 @@ else{
     echo "<h3>El recurso seleccionado no existe. Inténtelo nuevamente</h3>";
     header( "refresh:5;url=verProveedorConRecursos.php" );
 }
+
+
+require '../includes/footer.php';

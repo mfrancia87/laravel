@@ -58,4 +58,5 @@ $listaRecursos = listarRecursosObtenidos($conexion, $idCliente);
         </div>
     <?php
         }
+        require '../includes/footer.php';
     ?>

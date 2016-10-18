@@ -102,3 +102,6 @@ $listaCategorias = listarCategorias($conexion);
       
     
     </script>
+    
+<?php
+require '../includes/footer.php';

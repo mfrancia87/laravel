@@ -50,3 +50,6 @@ $listaProveedores = listarProveedores($conexion);
         }
     ?>
 </div>
+
+<?php
+require '../includes/footer.php';

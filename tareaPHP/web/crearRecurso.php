@@ -48,3 +48,5 @@ require '../includes/menuNav.php';
     <button type="submit" class="btn btn-success">Dar de alta el recurso</button>
 </form>
 
+<?php
+require '../includes/footer.php';

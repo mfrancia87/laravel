@@ -11,11 +11,14 @@ $listaRecursos = listarTodosRecursos($conexion);
 
 
 if($listaRecursos != NULL){
-    foreach ($listaRecursos as $recurso) {
+    
 ?>
 <div class="container">
 <div class="row">
-    <div class="col-lg-2 col-sm-2 col-xs-6">
+    <?php
+    foreach ($listaRecursos as $recurso) {
+    ?>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
         <div class="panel panel-info">
             <div class="panel-heading">Recurso: <strong><?php echo "$recurso[2]" ?> </strong></div>
             <div class="panel-body">
@@ -40,6 +43,7 @@ if($listaRecursos != NULL){
     </div>
 </div>
 </div>
+
 <?php
     }
 }
@@ -47,5 +51,7 @@ else{
     echo "<h3>No hay recursos agregados aún</h3>";
     header( "refresh:5;url=../index.php" );
 }
+
+require '../includes/footer.php';
 
 desconectarBD($conexion);

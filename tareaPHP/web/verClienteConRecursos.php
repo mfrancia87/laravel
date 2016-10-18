@@ -111,4 +111,7 @@ else{
     header( "refresh:5;url=listarProveedores.php" );
 }
 
+
+require '../includes/footer.php';
+
 desconectarBD($conexion);
