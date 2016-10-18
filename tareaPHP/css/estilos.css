@@ -1,7 +1,43 @@
-body {
-    padding: 80px 0 0 0; 
+*{
+    font-family: rockwell;
 }
 
+body {
+    height: 100%;
+    padding: 80px 0 0 0; 
+   
+}
+
+.container{
+    height: 700px;
+ /*   background-color: #908181;    */
+}
+
+
+#modal-login{
+    font-family: rockwell;
+    border-radius: 3px;
+    
+}
+
+.modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: black;
+    color: white;
+ }
+ 
+ .modal-body {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #383030;
+    color: white;
+ }
+
+
+ 
+
+ 
 .footer-distributed{
 	background-color: #292c2f;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
@@ -9,7 +45,6 @@ body {
 	width: 100%;
 	font: bold 16px sans-serif;
 	text-align: left;
-
 	padding: 50px 60px;
 	margin-top: 80px;
 	overflow: hidden;
@@ -102,6 +137,7 @@ body {
 	color: #d1d2d2;
 	font-size: 18px;
 }
+
 
 /* If you don't want the footer to be responsive, remove these media queries */
 
