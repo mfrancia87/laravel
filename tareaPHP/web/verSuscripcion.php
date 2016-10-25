@@ -12,93 +12,50 @@ require '../includes/operacionesBD.php';
 $conexion = conectarBD();
 $preciosPlanes = preciosPlanes($conexion);
 
-$free = "<span><strong>FREE</strong> || Completamente gratuito!!</span>";
-$silver = "<span><strong>SILVER</strong> || $preciosPlanes[1] USD por mes</span>";
-$gold = "<span><strong>GOLD</strong> || $preciosPlanes[2] USD por mes</span>";
+$free = "<span><strong><h3>FREE</h3></strong><h5>Completamente gratuito!!</h5></span>";
+$silver = "<span><strong><h3>SILVER</h3></strong><h5>$preciosPlanes[1] USD por mes</h5></span>";
+$gold = "<span><strong><h3>GOLD</h3></strong><h5>$preciosPlanes[2] USD por mes</h5></span>";
 
 ?>
 
 
 <div class="panel panel-info">
   <div class="panel-heading">Cambiar mi plan:</div>
-  <h3>Usted cuenta con el plan <strong><?php echo "$planUsuario"; ?></strong></h3>
+  <h3 style="text-align: center;">Usted cuenta con el plan <strong><?php echo "$planUsuario"; ?></strong></h3>
   <div class="panel-body">
+      <h4 style="text-align: center;">Contamos con las siguientes ofertas:</h4>
     
-  <form method="post" action="../phpScripts/cambiarSuscripcion.php" enctype="multipart/form-data">
-    <?php if($planUsuario == 'free'){
-    ?>
-        <div class="form-group">
-            <label for="planNuevo">Elija un nuevo plan:</label>
-            <select class="form-control" name="planNuevo" id="planNuevo">
-                <option value=""></option>
-                <option value="silver"><?php echo "$silver"; ?></option>
-                <option value="gold"><?php echo "$gold"; ?></option>
-            </select>
+        <div class="panel panel-info col-lg-4 col-md-4 col-xs-12 " style="cursor: pointer;">
+            <img id="free" class="center-block" src="../img/sitio/free.png" style="height: 200px; cursor: pointer;">
+            <div style="text-align: center"><?php echo $free;?></div>
         </div>
-    <?php
-    }
-    
-    if($planUsuario == 'silver'){
-    ?>
-        <div class="form-group">
-            <label for="planNuevo">Elija un nuevo plan:</label>
-            <select class="form-control" name="planNuevo" id="planNuevo">
-                <option value=""></option>
-                <option value="free"><?php echo "$free"; ?></option>
-                <option value="gold"><?php echo "$gold"; ?></option>
-            </select>
+        <div class="panel panel-info col-lg-4 col-md-4 col-xs-12">
+            <img id="silver" class="center-block" src="../img/sitio/silver.png" style="height: 200px; cursor: pointer;">
+            <div style="text-align: center"><?php echo $silver;?></div>
         </div>
-    <?php
-    }
-    
-    if($planUsuario == 'gold'){
-    ?>
-        <div class="form-group">
-            <label for="planNuevo">Elija un nuevo plan:</label>
-            <select class="form-control" name="planNuevo" id="planNuevo">
-                <option value=""></option>
-                <option value="free"><?php echo "$free"; ?></option>
-                <option value="silver"><?php echo "$silver"; ?></option>
-            </select>
+        <div class="panel panel-info col-lg-4 col-md-4 col-xs-12">
+            <img id="gold" class="center-block" src="../img/sitio/gold.png" style="height: 200px; cursor: pointer;">
+            <div style="text-align: center"><?php echo $gold;?></div>
         </div>
-    <?php
-    }
-    ?>
-      <button id="cambiarPlan" type="submit" class="btn btn-success">Cambiar de plan</button>
     
-    </form>
-     
+        <form method="post" action="../phpScripts/cambiarSuscripcion.php" enctype="multipart/form-data">
+            <input id="planNuevo" name="planNuevo" type="text" hidden>
+            <button id="cambiarPlan" type="submit" class="btn btn-success pull-right">Cambiar de plan</button>
+        </form>
+      
   </div>
 </div>
 
 <script>
     $(function(){
-        
-        $('#planNuevo').on('change', function(){
-           var plan = $(this).find(":selected").val();
-           console.log(plan);
-           
-            var mensajePago = "Has cambiado de plan";
-
-            var precios = [<?php echo '"'.implode('","', $preciosPlanes).'"' ?>];
-            if(plan == "free"){
-                mensajePago = "Ha accedido al plan Free. Usted perderá el plan que tenía, no existiendo reembolso del mismo";
-            }
-            if(plan == "silver"){
-                mensajePago = "Ha accedido al plan Silver. Se le remitirá a su tarjeta de crédito un total de " + precios[1] + " USD por mes";
-            }
-            if(plan == "gold"){
-                mensajePago = "Ha accedido al plan Gold. Se le remitirá a su tarjeta de crédito un total de " + precios[2] + " USD por mes";
-            }
-
-            $('#cambiarPlan').on('click', function(e){
-                e.preventDefault;
-                alert(mensajePago);
-            });
+        $('.center-block').on("click", function(){
+            var plan = $(this).attr("id");
+            
+            $('#planNuevo').attr("value", plan);
+            
+            $(this).parent().css("border", "5px red solid");
+            
+            $('.center-block').not($(this)).parent().css("border", "1px black solid");
         });
     });
 </script>
-
-<?php
- require '../includes/footer.php';
- ?>

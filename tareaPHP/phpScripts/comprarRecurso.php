@@ -32,7 +32,6 @@ if($planRecurso == "free" || $planCliente == "gold" || strcmp($planRecurso, $pla
 comprarRecurso($conexion, $idCliente, $idRecurso, $idProveedor);
 }
 else{
-
 ?>
 
 <div class="panel panel-danger">
@@ -40,11 +39,24 @@ else{
   <div class="panel-body">
       <h3>Usted no puede obtener este recurso</h3>
       <h5>Para obtener este recurso, cambie su suscripción a <?php echo "$planRecurso";?></h5>
-      header("refresh:4;url=verSuscripcion.php" );
   </div>
 </div>
+
+<script>
+$(function(){
+    var delay = 3000; //milisegundos
+    var pagina = "../web/VerSuscripcion.php";
+    setTimeout(function(){ 
+        window.location = pagina; 
+    }, delay);
+});
+</script>
+
+
 <?php
 }
 
 
 desconectarBD($conexion);
+
+require '../includes/footer.php';

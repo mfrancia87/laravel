@@ -6,7 +6,13 @@
  require '../includes/operacionesBD.php';
  
 $idRecurso = filter_input(INPUT_GET, "id");
-$idCliente = $_SESSION["idUsuario"];
+if(isset($_SESSION["idUsuario"])){
+    $idCliente = $_SESSION["idUsuario"];
+}
+else{
+    $idCliente = NULL;
+}
+
 $conexion = conectarBD();
 $recurso = getRecursoById($conexion, $idRecurso);
 $yaLoCompro = verificarCompraRecurso($conexion, $idCliente, $idRecurso);
@@ -45,11 +51,14 @@ if($recurso != NULL){
     <input name="idRecurso" type="hidden" value="<?php echo $recurso[0]; ?>">
     <input name="idProveedor" type="hidden" value="<?php echo $recurso[1]; ?>">
     <input name="link" type="hidden" value="<?php echo $recurso[8]; ?>">
+    <?php
+    if(isset($_SESSION["idUsuario"])){
+    ?>
     <input name="idCliente" type="hidden" value="<?php echo $_SESSION["idUsuario"]; ?>">
     <input name="planCliente" type="hidden" value="<?php echo $_SESSION["plan"] ?>">
-    
-    
     <?php
+    }
+    
     if(isset($_SESSION["idUsuario"]) && $_SESSION["idUsuario"]!=1){
         if(!$yaLoCompro){
     ?>
@@ -81,13 +90,20 @@ else{
         <div class="panel-body">
       <?php
             echo "<h3>El recurso seleccionado no existe. Inténtelo nuevamente</h3>";
-        header( "refresh:5;url=verProveedorConRecursos.php" )
         
     ?>
         </div>
     </div>
 
-
+    <script>
+    $(function(){
+        var delay = 3000; //milisegundos
+        var pagina = "../index.php";
+        setTimeout(function(){ 
+            window.location = pagina; 
+        }, delay);
+    });
+    </script>
 
 
 <?php
