@@ -56,7 +56,9 @@ $listaRecursos = listarRecursosObtenidos($conexion, $idCliente);
                 <h3>Usted no ha obtenido recursos aún</h3>
             </div>
         </div>
+</div> <!-- body container -->
     <?php
         }
+        
         require '../includes/footer.php';
     ?>

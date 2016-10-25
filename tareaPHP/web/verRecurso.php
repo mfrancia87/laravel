@@ -6,10 +6,10 @@
  require '../includes/operacionesBD.php';
  
 $idRecurso = filter_input(INPUT_GET, "id");
-$idProveedor = filter_input(INPUT_GET, "idProveedor");
-
+$idCliente = $_SESSION["idUsuario"];
 $conexion = conectarBD();
 $recurso = getRecursoById($conexion, $idRecurso);
+$yaLoCompro = verificarCompraRecurso($conexion, $idCliente, $idRecurso);
 
 if($recurso != NULL){
 ?>
@@ -44,34 +44,56 @@ if($recurso != NULL){
     </div>
     <input name="idRecurso" type="hidden" value="<?php echo $recurso[0]; ?>">
     <input name="idProveedor" type="hidden" value="<?php echo $recurso[1]; ?>">
+    <input name="link" type="hidden" value="<?php echo $recurso[8]; ?>">
+    <input name="idCliente" type="hidden" value="<?php echo $_SESSION["idUsuario"]; ?>">
+    <input name="planCliente" type="hidden" value="<?php echo $_SESSION["plan"] ?>">
+    
+    
     <?php
-        if(!empty($idProveedor)){
-    ?>
-      <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="verProveedorConRecursos.php?id=<?php echo $idProveedor; ?>">Volver</a></button>
-    <?php
-        }else{
-    ?>
-      <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="listarRecursos.php">Volver</a></button>
-    <?php
-      }
-      if(isset($_SESSION["esProveedor"]) && $_SESSION["esProveedor"]==false && $_SESSION["idUsuario"]!=1){
+    if(isset($_SESSION["idUsuario"]) && $_SESSION["idUsuario"]!=1){
+        if(!$yaLoCompro){
     ?>
       <button type="submit" class="btn btn-success">Obtener recurso</button>     
-    <?php
+    <?php 
+        }
       }
     ?>
-  </div>
-    
       
-    </form>
+  </div>
+  </form>
+      <?php
+      if($yaLoCompro){
+          ?>
+          <button class="btn btn-success pull-right"><a style="text-decoration: none; color: white;" href="<?php echo $recurso[8];?>" download>Descargar</a></button>
+      <?php
+          }
+      ?>
+      
+      
   </div>
 </div>
 <?php
 }
 else{
-    echo "<h3>El recurso seleccionado no existe. Inténtelo nuevamente</h3>";
-    header( "refresh:5;url=verProveedorConRecursos.php" );
+    ?>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Recurso no encontrado</div>
+        <div class="panel-body">
+      <?php
+            echo "<h3>El recurso seleccionado no existe. Inténtelo nuevamente</h3>";
+        header( "refresh:5;url=verProveedorConRecursos.php" )
+        
+    ?>
+        </div>
+    </div>
+
+
+
+
+<?php
 }
+    
+
 
 
 require '../includes/footer.php';

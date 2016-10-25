@@ -52,13 +52,14 @@ if($datosCliente != NULL){
   </div>
 </div>
 
+
+    <?php
+        if($recursosCliente != NULL){
+    ?>
 <div class="panel panel-info">
     <div class="panel-heading">Recursos adquiridos por <strong><?php echo "$datosCliente[1]" ?> </strong></div>
     <div class="panel-body">
 <div class="table-responsive">
-    <?php
-        if($recursosCliente != NULL){
-    ?>
     <table id="recursos" class="table table-bordered table-hover">
         <thead>
           <tr>
@@ -110,8 +111,7 @@ else{
     echo "<h3>El cliente seleccionado no existe. Inténtelo nuevamente</h3>";
     header( "refresh:5;url=listarProveedores.php" );
 }
-
+desconectarBD($conexion);
 
 require '../includes/footer.php';
 
-desconectarBD($conexion);

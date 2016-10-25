@@ -1,5 +1,5 @@
 <?php 
- session_start();
+ //session_start();
  require '../includes/header.php';
 
  require '../includes/menuNav.php';
@@ -8,36 +8,39 @@
 $idRecurso = filter_input(INPUT_POST, "idRecurso");
 $idProveedor = filter_input(INPUT_POST, "idProveedor");
 $planRecurso = filter_input(INPUT_POST, "tipoPlan");
-$idCliente = $_SESSION["idUsuario"];
-$planCliente = $_SESSION["plan"];
+$tipoRecurso = filter_input(INPUT_POST, "tipoRecurso");
+$idCliente = filter_input(INPUT_POST, "idCliente");
+$planCliente = filter_input(INPUT_POST, "planCliente");
+$link = filter_input(INPUT_POST, "link");
 
 $conexion = conectarBD();
 
-if($planRecurso == "free" || $planCliente == "gold" || strcmp($planRecurso, $planCliente)){
+if($planRecurso == "free" || $planCliente == "gold" || strcmp($planRecurso, $planCliente)==0){
 
-comprarRecurso($conexion, $idCliente, $idRecurso, $idProveedor);
+
 ?>
 
 <div class="panel panel-info">
   <div class="panel-heading">Editar recurso:</div>
   <div class="panel-body">
       <h3>Recurso obtenido</h3>
-      <h5>Descarga comenzando en instantes...</h5>
-  
+      <h5>Aquí está su link</h5>
+      <button class="btn btn-success"><a style="text-decoration: none; color: white;" href="<?php echo $link;?>" download>Descargar</a></button>
   </div>
 </div>
 <?php
+comprarRecurso($conexion, $idCliente, $idRecurso, $idProveedor);
 }
 else{
-  
+
 ?>
 
 <div class="panel panel-danger">
   <div class="panel-heading">Error:</div>
   <div class="panel-body">
       <h3>Usted no puede obtener este recurso</h3>
-      <h5>Para obtener este recurso, cambie su suscripción a <?php echo "$planRecurso"; ?></h5>
-      header( "refresh:4;url=verSuscripcion.php" );
+      <h5>Para obtener este recurso, cambie su suscripción a <?php echo "$planRecurso";?></h5>
+      header("refresh:4;url=verSuscripcion.php" );
   </div>
 </div>
 <?php

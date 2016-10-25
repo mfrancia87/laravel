@@ -15,11 +15,11 @@ require "loginModal.php";
         <div class="collapse navbar-collapse" id="opciones">
         <ul class="nav navbar-nav">
             
-            <?php
+<?php
                 if(!isset($_SESSION["nombre"])){    //si es visitante
                     
-            ?>  
-                <li><a href="/tareaPHP/web/listarRecursos.php">Ver recursos</a></li>
+?>
+                
                 </ul>
             
                 <form class="navbar-form navbar-left">
@@ -34,10 +34,10 @@ require "loginModal.php";
                 <!--    <li><a href="/tareaPHP/web/login.php">Login</a></li>    -->
                     <li><a data-toggle="modal" data-target="#modal-login" style="cursor: pointer;">Login</a></li>
                 </ul>
-            <?php
+<?php
                 }
                 if(isset($_SESSION["nombre"]) && $_SESSION["esProveedor"]==true){    //si es proveedor
-            ?>
+?>
                 <li><a href="/tareaPHP/web/listarRecursos.php">Ver recursos</a></li>
                 <li><a href="/tareaPHP/web/misRecursosPublicados.php">Ver mis recursos publicados</a></li>
                 </ul>
@@ -61,12 +61,11 @@ require "loginModal.php";
                 </ul>
                 
                 
-                
-            <?php
+<?php
             }
                 if(isset($_SESSION["nombre"]) && $_SESSION["esProveedor"]==false && ($_SESSION["idUsuario"]!=1)){    //si es cliente
-            ?>
-                <li><a href="/tareaPHP/web/listarRecursos.php">Ver recursos</a></li>
+?>
+                
                 <li><a href="/tareaPHP/web/misRecursosObtenidos.php">Ver mis recursos obtenidos</a></li>
                 <li><a href="/tareaPHP/web/verSuscripcion.php">Ver mi suscripción</a></li>
                 </ul>
@@ -89,13 +88,12 @@ require "loginModal.php";
                 </li>
                 </ul>
             
-            <?php
+<?php
                 }
                 if(isset($_SESSION["nombre"]) && $_SESSION["idUsuario"]==1){    //si es  administrador
-            ?>
-                <li><a href="/tareaPHP/web/listarRecursos.php">Ver recursos</a></li>
-                <li><a href="/tareaPHP/web/actualizarPreciosSuscripciones.php">Precios suscripciones</a></li>
-                <li><a href="/tareaPHP/web/gestionarCategorias.php">Gestionar categorias</a></li>
+?>
+                
+                
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-left">
@@ -105,6 +103,15 @@ require "loginModal.php";
                             <li><a href="/tareaPHP/web/listarClientes.php">Listar clientes</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/tareaPHP/web/listarProveedores.php">Listar proveedores</a></li>
+                        </ul>
+                        
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestionar<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/tareaPHP/web/actualizarPreciosSuscripciones.php">Precios suscripciones</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/tareaPHP/web/gestionarCategorias.php">Gestionar categorias</a></li>
                         </ul>
                         
                     </li>
@@ -127,9 +134,9 @@ require "loginModal.php";
                     </ul>
                 </li>
                 </ul>
-            <?php
+<?php
                 }
-            ?>
+?>
         
         </div>
     </div>

@@ -65,8 +65,9 @@ $gold = "<span><strong>GOLD</strong> || $preciosPlanes[2] USD por mes</span>";
     }
     ?>
       <button id="cambiarPlan" type="submit" class="btn btn-success">Cambiar de plan</button>
-    <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="../index.php">Cancelar</a></button>
+    
     </form>
+     
   </div>
 </div>
 

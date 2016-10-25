@@ -86,7 +86,7 @@ if($datosProveedor != NULL){
             <td><?php echo "$recurso[3]" ?></td>
             <td><?php echo "$recurso[5]" ?></td>
             <td><?php echo "$recurso[6]" ?></td>
-            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>&idProveedor=<?php echo $recurso[1]?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
+            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
           </tr>
           <?php
             }

@@ -425,14 +425,29 @@ function comprarRecurso($conexionBD, $idCliente, $idRecurso, $idProveedor){
     $query = "INSERT INTO recursoscliente (idUsuario, idRecurso, idProveedor) VALUES ('$idCliente', '$idRecurso', '$idProveedor')";
 
     $result = mysqli_query($conexionBD, $query);
-    if($result){
-        //agregado. redirijo a inicio
-        header( "Location: ../web/misRecursosObtenidos.php" );
-    }else{
+    if(!$result){
         echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
     }
 }
 
+//devuelve true si el cliente ya compro ese producto, false si no lo ha comprado aun
+function verificarCompraRecurso($conexionBD, $idCliente, $idRecurso){
+    $query = "SELECT * FROM recursoscliente WHERE idUsuario = '$idCliente' AND idRecurso = '$idRecurso'";
+
+    $result = mysqli_query($conexionBD, $query);
+    if($result){
+        $cantidad = mysqli_num_rows($result);
+        if($cantidad>0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
 
 
 function desconectarBD($conexionBD){
