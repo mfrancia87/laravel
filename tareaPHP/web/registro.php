@@ -12,12 +12,12 @@
     </div>
     
     <div class="form-group">
-        <label for="nick">Nick:</label>
-        <input type="text" class="form-control" name="nick" required>
+        <label for="nick">Nick:<span id="errorNick"></span></label>
+        <input type="text" class="form-control" name="nick" id="nick" required>
     </div>
      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" name="email" required>
+         <label for="email">Email:<span id="errorMail"></span></label>
+        <input type="email" class="form-control" name="email" id="email" required>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
@@ -50,7 +50,7 @@
         <input type="text" class="form-control" name="linkEmpresa">
     </div>
     
-    <button type="submit" class="btn btn-default">Registrarme!</button>
+    <button type="submit" class="btn btn-default" disabled="false">Registrarme!</button>
 </form>
 
 
@@ -79,6 +79,68 @@
             }
         });
         
+        
+        $('input[name=nick]').on("blur", function(){
+            var nickVerificar = $('#nick').val();
+            
+            
+            $.ajax({
+                type:"POST",
+                url: "/tareaPHP/ajax/verificarNickEnBd.php",
+                data:{"nickVerificar": nickVerificar},
+                success:function(resp){
+                    if(resp=="true"){
+                        $('#nick').css("border", "2px solid red");
+                        $('#errorNick').html("El nick ya está en uso").css({"background-color":"red", "color":"white"});
+                        $('button').prop('disabled', true);
+                    }
+                    else{
+                        $('#nick').css("border", "2px solid green");
+                        $('#errorNick').html("El nick está disponible").css({"background-color":"green", "color":"white"});
+                        $('button').prop('disabled', false);
+                    }
+                },
+                error: function(jqXHR, estado, error){
+                    console.log(estado);
+                    console.log(error);
+                },
+                complete: function(jqXHR, estado){
+				  console.log(estado);
+				},
+                timeout: 10000
+            })
+        });
+        
+        $('input[name=email]').on("blur", function(){
+            var emailVerificar = $('#email').val();
+            
+            
+            $.ajax({
+                type:"POST",
+                url: "/tareaPHP/ajax/verificarCorreoEnBd.php",
+                data:{"emailVerificar": emailVerificar},
+                success:function(resp){
+                    if(resp=="true"){
+                        $('#email').css("border", "2px solid red");
+                        $('#errorMail').html("El mail ya está en uso").css({"background-color":"red", "color":"white"});
+                        $('button').prop('disabled', true);
+                    }
+                    else{
+                        $('#email').css("border", "2px solid green");
+                        $('#errorMail').html("El mail está disponible").css({"background-color":"green", "color":"white"});
+                        $('button').prop('disabled', false);
+                    }
+                },
+                error: function(jqXHR, estado, error){
+                    console.log(estado);
+                    console.log(error);
+                },
+                complete: function(jqXHR, estado){
+				  console.log(estado);
+				},
+                timeout: 10000
+            })
+        });
         
     });
 </script>

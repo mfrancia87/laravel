@@ -151,6 +151,11 @@ require "loginModal.php";
                                 $('#modal-login').on('click', function(){
                                         $( '#' + $(this).data('modal-id') ).modal();
                                 });
+                                
+                                
+                                //datalist con ajax para el buscador, con evento keyup
+                                
+                                
                         });
                 </script>
 
