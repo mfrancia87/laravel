@@ -60,7 +60,6 @@
         }
     ?>
       <button type="submit" class="btn btn-success">Actualizar</button>
-      <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="../index.php">Cancelar</a></button>
   </div>
     
       

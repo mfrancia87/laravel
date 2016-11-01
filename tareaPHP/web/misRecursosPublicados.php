@@ -17,7 +17,7 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
     <?php
         if($listaRecursos != NULL){
     ?>
-    <table id="recursos" class="table table-bordered table-hover">
+    <table id="recursosPublicados" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -62,8 +62,9 @@ $listaRecursos = listarRecursos($conexion, $idProveedor);
 
 
 <div class="form-group">
-    <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="../web/crearRecurso.php">Crear nuevo recurso</a></button>
+    <button class="btn btn-success"><a style="text-decoration: none; color: white" href="../web/crearRecurso.php">Crear nuevo recurso</a></button>
 </div>
 
+</div>
 <?php
 require '../includes/footer.php';

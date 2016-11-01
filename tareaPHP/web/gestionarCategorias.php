@@ -13,9 +13,9 @@ $listaCategorias = listarCategorias($conexion);
 
 
     
-    <div class="col-lg-8 col-sm-8 col-xs-12">
-        <h4>El sistema cuenta con las siguientes categorías</h4>
-        <ul class="list-group" id="lista">
+<div class="col-lg-8 col-sm-8 col-xs-12">
+        <h4><strong>El sistema cuenta con las siguientes categorías</strong></h4>
+        <ul class="list-group" id="lista" style="background-color: white; opacity: 0.7;">
             <?php
                 foreach ($listaCategorias as $categoria){
             ?>
@@ -80,12 +80,6 @@ $listaCategorias = listarCategorias($conexion);
     
     <script>
         $(function(){
-            
-            $('.list-group-item').on('mouseover', function() {
-                $(this).css("background-color","lavender");
-            }).on('mouseout', function() {
-                $(this).css("background-color","transparent");
-            });
                      
             $('input[name="checkboxID"]').on('click', function(){
                 if ($(this).is(':checked')){

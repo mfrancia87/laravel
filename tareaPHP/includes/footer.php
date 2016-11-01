@@ -4,33 +4,19 @@
             <div class="footer-left">
 
                     <p class="footer-links">
-                            <a href="#">Home</a>
-                            ·
-                            <a href="#">Blog</a>
-                            ·
-                            <a href="#">Pricing</a>
-                            ·
-                            <a href="#">About</a>
-                            ·
-                            <a href="#">Faq</a>
-                            ·
-                            <a href="#">Contact</a>
+                            <a href="#">Inicio</a>
+                            |
+                            <a href="#">Acerca de nosotros</a>
+                            |
+                            <a href="#">Contacto</a>
                     </p>
 
-                    <p class="footer-company-name">Company Name &copy; 2015</p>
-
-            </div>
-
-            <div class="footer-right">
-
-                    <form method="get" action="#">
-                            <input placeholder="Search our website" name="search" />
-                            <i class="fa fa-search"></i>
-                    </form>
+                    <p class="footer-company-name">Tecnólogo en Informática &copy; 2016</p>
 
             </div>
 
     </footer>
+
 
     
 </body>

@@ -16,7 +16,7 @@ $listaClientes = listarClientes($conexion);
     <?php
         if($listaClientes != NULL){
     ?>
-    <table id="clientes" class="table table-bordered table-hover">
+    <table id="tablaClientes" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th>Nick</th>
@@ -35,7 +35,7 @@ $listaClientes = listarClientes($conexion);
             <td><?php echo "$cliente[4]" ?></td>
             <td><?php echo "$cliente[5]" ?></td>
             <td><?php echo "$cliente[2]" ?></td>
-            <td><a href="verClienteConRecursos.php?id=<?php echo $cliente[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
+            <td><a href="verClienteConRecursos.php?id=<?php echo $cliente[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-zoom-in"></span></a></td>
           </tr>
           <?php
           }

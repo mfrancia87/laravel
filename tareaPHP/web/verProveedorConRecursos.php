@@ -51,8 +51,6 @@ if($datosProveedor != NULL){
         <input type="text" class="form-control" name="linkEmpresa" value="<?php echo $datosProveedor[12]; ?>" readonly>
     </div>
   
-      
-    <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="listarProveedores.php">Volver</a></button>
   </div>
     
       
@@ -61,7 +59,7 @@ if($datosProveedor != NULL){
 </div>
 
 <div class="panel panel-info">
-        <div class="panel-heading">Recursos adquiridos por <strong><?php echo "$datosProveedor[1]" ?> </strong></div>
+        <div class="panel-heading">Recursos subidos por <strong><?php echo "$datosProveedor[1]" ?> </strong></div>
         <div class="panel-body">
 <div class="table-responsive">
     <?php
@@ -86,7 +84,7 @@ if($datosProveedor != NULL){
             <td><?php echo "$recurso[3]" ?></td>
             <td><?php echo "$recurso[5]" ?></td>
             <td><?php echo "$recurso[6]" ?></td>
-            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
+            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-zoom-in"></span></a></td>
           </tr>
           <?php
             }

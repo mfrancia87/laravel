@@ -9,7 +9,7 @@ $idCliente = filter_input(INPUT_GET, "id");
 
 $conexion = conectarBD();
 $datosCliente = getUsuarioById($conexion, $idCliente);
-$recursosCliente = NULL;
+$recursosCliente = listarRecursosObtenidos($conexion, $idCliente);
         //listarRecursos($conexion, $idCliente);
 
 if($datosCliente != NULL){
@@ -19,7 +19,6 @@ if($datosCliente != NULL){
     <div class="panel-heading">Proveedor: <strong><?php echo "$datosCliente[1]" ?> </strong></div>
   <div class="panel-body">
     
-  <form method="post" action="../phpScripts/actualizarRecurso.php" enctype="multipart/form-data">
   
   <div class="col-lg-4 col-sm-4 col-xs-12">
         <div class="form-group">
@@ -44,11 +43,9 @@ if($datosCliente != NULL){
         <input type="text" class="form-control" name="apellido" value="<?php echo $datosCliente[5]; ?>" readonly>
     </div> 
       
-    <button class="btn btn-danger"><a style="text-decoration: none; color: white" href="listarClientes.php">Volver</a></button>
   </div>
     
       
-    </form>
   </div>
 </div>
 
@@ -79,7 +76,7 @@ if($datosCliente != NULL){
             <td><?php echo "$recurso[3]" ?></td>
             <td><?php echo "$recurso[5]" ?></td>
             <td><?php echo "$recurso[6]" ?></td>
-            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>&idProveedor=<?php echo $recurso[1]?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
+            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>&idProveedor=<?php echo $recurso[1]?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-zoom-in"></span></a></td>
           </tr>
           <?php
             }

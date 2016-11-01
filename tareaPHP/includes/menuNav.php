@@ -24,7 +24,7 @@ require "loginModal.php";
             
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos">
+                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
@@ -38,13 +38,12 @@ require "loginModal.php";
                 }
                 if(isset($_SESSION["nombre"]) && $_SESSION["esProveedor"]==true){    //si es proveedor
 ?>
-                <li><a href="/tareaPHP/web/listarRecursos.php">Ver recursos</a></li>
                 <li><a href="/tareaPHP/web/misRecursosPublicados.php">Ver mis recursos publicados</a></li>
                 </ul>
                 
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos">
+                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
@@ -72,7 +71,7 @@ require "loginModal.php";
                 
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos">
+                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
@@ -119,7 +118,7 @@ require "loginModal.php";
                 
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos">
+                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
                     </div>
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
@@ -164,5 +163,10 @@ require "loginModal.php";
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
         font-family: rockwell;
         color: #a4fae7;
+        background-color: #666666;
+        transition: all 0.3s ease;
 }
+
+
+
 </style>

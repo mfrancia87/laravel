@@ -3,6 +3,10 @@
  require '../includes/menuNav.php';
 ?>
 
+<div class="panel panel-info">
+  <div class="panel-heading">Registro</div>
+  <div class="panel-body">
+
 <form method="post" action="../phpScripts/registroScript.php" enctype="multipart/form-data">
     
     <div class="form-group">
@@ -52,7 +56,8 @@
     
     <button type="submit" class="btn btn-default" disabled="false">Registrarme!</button>
 </form>
-
+</div>
+</div>
 
 <script>
     $(function(){
@@ -90,14 +95,18 @@
                 data:{"nickVerificar": nickVerificar},
                 success:function(resp){
                     if(resp=="true"){
-                        $('#nick').css("border", "2px solid red");
-                        $('#errorNick').html("El nick ya está en uso").css({"background-color":"red", "color":"white"});
-                        $('button').prop('disabled', true);
+                        if(nickVerificar !== ''){
+                            $('#nick').css("border", "2px solid red");
+                            $('#errorNick').html("El nick ya está en uso").css({"background-color":"red", "color":"white"});
+                            $('button').prop('disabled', true);
+                        }
                     }
                     else{
-                        $('#nick').css("border", "2px solid green");
-                        $('#errorNick').html("El nick está disponible").css({"background-color":"green", "color":"white"});
-                        $('button').prop('disabled', false);
+                        if(nickVerificar !== ''){
+                            $('#nick').css("border", "2px solid green");
+                            $('#errorNick').html("El nick está disponible").css({"background-color":"green", "color":"white"});
+                            $('button').prop('disabled', false);
+                        }
                     }
                 },
                 error: function(jqXHR, estado, error){
@@ -109,6 +118,7 @@
 				},
                 timeout: 10000
             })
+            
         });
         
         $('input[name=email]').on("blur", function(){
@@ -121,14 +131,18 @@
                 data:{"emailVerificar": emailVerificar},
                 success:function(resp){
                     if(resp=="true"){
-                        $('#email').css("border", "2px solid red");
-                        $('#errorMail').html("El mail ya está en uso").css({"background-color":"red", "color":"white"});
-                        $('button').prop('disabled', true);
+                        if(emailVerificar !== ''){
+                            $('#email').css("border", "2px solid red");
+                            $('#errorMail').html("El mail ya está en uso").css({"background-color":"red", "color":"white"});
+                            $('button').prop('disabled', true);
+                        }
                     }
                     else{
-                        $('#email').css("border", "2px solid green");
-                        $('#errorMail').html("El mail está disponible").css({"background-color":"green", "color":"white"});
-                        $('button').prop('disabled', false);
+                        if(emailVerificar !== ''){
+                            $('#email').css("border", "2px solid green");
+                            $('#errorMail').html("El mail está disponible").css({"background-color":"green", "color":"white"});
+                            $('button').prop('disabled', false);
+                        }
                     }
                 },
                 error: function(jqXHR, estado, error){

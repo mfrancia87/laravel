@@ -331,8 +331,8 @@ function listarRecursosObtenidos($conexion, $idCliente){
     $query = "SELECT idRecurso FROM recursoscliente WHERE idUsuario = '$idCliente'";
     $result = mysqli_query( $conexion, $query );
     $listaIds = [];
-    $recursos = [];
-    $i = 0;
+    //$recursos = [];
+    //$i = 0;
     if($result){
         if(mysqli_num_rows($result)>0){
             //devuelvo el array

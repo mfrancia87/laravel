@@ -17,7 +17,7 @@ $listaRecursos = listarRecursosObtenidos($conexion, $idCliente);
     <?php
         if($listaRecursos != NULL){
     ?>
-    <table id="recursos" class="table table-bordered table-hover">
+    <table id="recursosObtenidos" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -36,7 +36,7 @@ $listaRecursos = listarRecursosObtenidos($conexion, $idCliente);
             <td><?php echo "$recurso[3]" ?></td>
             <td><?php echo "$recurso[5]" ?></td>
             <td><?php echo "$recurso[6]" ?></td>
-            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
+            <td><a href="verRecurso.php?id=<?php echo $recurso[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-zoom-in"></span></a></td>
           </tr>
           <?php
             }

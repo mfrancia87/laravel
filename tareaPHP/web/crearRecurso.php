@@ -6,6 +6,10 @@ require '../includes/menuNav.php';
 
 ?>
 
+
+<div class="panel panel-info">
+  <div class="panel-heading">Nuevo recurso</div>
+  <div class="panel-body">
 <form method="post" action="../phpScripts/crearRecurso.php" enctype="multipart/form-data">
     
     <div class="form-group">
@@ -47,6 +51,8 @@ require '../includes/menuNav.php';
     
     <button type="submit" class="btn btn-success">Dar de alta el recurso</button>
 </form>
-
+  </div>
+</div>
+      
 <?php
 require '../includes/footer.php';

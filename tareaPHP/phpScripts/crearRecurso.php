@@ -20,7 +20,7 @@ else{
 
 
 //manejo de imagen
-$directorio = "../img/recurso/";
+$directorio = "/tareaPHP/img/recurso/";
 
 if(($_FILES["imagen"]["error"] > 0) || (!isset($_FILES["imagen"]))){
     //echo "Error: " . $_FILES["imagen"]["error"] . "<br>";

@@ -16,7 +16,7 @@ $listaProveedores = listarProveedores($conexion);
     <?php
         if($listaProveedores != NULL){
     ?>
-    <table id="clientes" class="table table-bordered table-hover">
+    <table id="tablaProveedores" class="table table-bordered table-hover">
         <thead>
           <tr>
             <th>Nick</th>
@@ -35,7 +35,7 @@ $listaProveedores = listarProveedores($conexion);
             <td><?php echo "$proveedor[4]" ?></td>
             <td><?php echo "$proveedor[5]" ?></td>
             <td><?php echo "$proveedor[2]" ?></td>
-            <td><a href="verProveedorConRecursos.php?id=<?php echo $proveedor[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></a></td>
+            <td><a href="verProveedorConRecursos.php?id=<?php echo $proveedor[0] ?>" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-zoom-in"></span></a></td>
           </tr>
           <?php
           }
