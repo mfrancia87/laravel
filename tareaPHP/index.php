@@ -34,7 +34,7 @@ if($listaRecursos != NULL){
 <?php
     foreach ($listaRecursos as $recurso) {
     ?>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
          <div class="panel panel-info" style="height: 300px;">
             <div class="panel-heading"><strong><?php echo "$recurso[2]" ?> </strong></div>
             <div class="panel-body">
@@ -64,11 +64,7 @@ else{
     <div class="panel panel-danger">
         <div class="panel-heading">Recurso no encontrado</div>
         <div class="panel-body">
-      <?php
-        echo "<h3>No hay recursos agregados aún</h3>";
-        header( "refresh:5;url=../index.php" );
-        
-    ?>
+            <h3>No hay recursos agregados aún</h3>
         </div>
     </div>
 

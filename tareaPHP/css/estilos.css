@@ -98,9 +98,20 @@ table{
     opacity: 0.9;
 }
 
+.panel-heading{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.panel-heading:hover{
+    overflow: visible;
+}
+
 .btn-success{
     background-color: #0000cc !important;
 }
+
 
 @media (max-width: 1000px) {
 

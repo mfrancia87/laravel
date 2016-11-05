@@ -13,7 +13,7 @@ $nombreEmpresa = filter_input(INPUT_POST, "nombreEmpresa");
 $linkEmpresa = filter_input(INPUT_POST, "linkEmpresa");
 
 
-$directorio = "/tareaPHP/img/perfil/";
+$directorio = "../img/perfil/";
 
 //si no selecciona imagen, se le asigna una por defecto
 if(($_FILES["imagen"]["error"] > 0) || (!isset($_FILES["imagen"]))){

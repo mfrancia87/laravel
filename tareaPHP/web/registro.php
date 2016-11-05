@@ -16,11 +16,11 @@
     </div>
     
     <div class="form-group">
-        <label for="nick">Nick:<span id="errorNick"></span></label>
+        <label for="nick">Nick:<span class="label" id="errorNick"></span></label>
         <input type="text" class="form-control" name="nick" id="nick" required>
     </div>
      <div class="form-group">
-         <label for="email">Email:<span id="errorMail"></span></label>
+         <label for="email">Email:<span class="label" id="errorMail"></span></label>
         <input type="email" class="form-control" name="email" id="email" required>
     </div>
     <div class="form-group">

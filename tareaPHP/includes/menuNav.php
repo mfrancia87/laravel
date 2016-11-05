@@ -1,5 +1,21 @@
 <?php
 require "loginModal.php";
+
+/*
+require "operacionesBD.php";
+
+$conexion = mysqli_connect("localhost", "root", "root", "tareaphp");
+
+
+$proveedores = listarProveedores($conexion);
+
+
+$recursos = listarTodosRecursos($conexion);
+
+
+$resultado = array_merge($proveedores, $recursos);
+*/
+
 ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" style="font-family: rockwell;">
@@ -13,21 +29,23 @@ require "loginModal.php";
             <a class="navbar-brand" href="/tareaPHP/index.php">Inicio</a>
         </div>
         <div class="collapse navbar-collapse" id="opciones">
-        <ul class="nav navbar-nav">
+        
             
+                <div class="navbar-form navbar-left">
+                    <div class="form-group">
+                      <input list="busqueda" type="text" class="form-control" name="buscar" placeholder="Buscar recursos o proveedores">
+                      <datalist id="busqueda">
+                          
+                      </datalist>
+                    </div>
+                    
+                </div>
 <?php
                 if(!isset($_SESSION["nombre"])){    //si es visitante
                     
 ?>
                 
-                </ul>
-            
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
-                    </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
+                
             
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/tareaPHP/web/registro.php">Registro</a></li>
@@ -38,17 +56,16 @@ require "loginModal.php";
                 }
                 if(isset($_SESSION["nombre"]) && $_SESSION["esProveedor"]==true){    //si es proveedor
 ?>
-                <li><a href="/tareaPHP/web/misRecursosPublicados.php">Ver mis recursos publicados</a></li>
-                </ul>
-                
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
-                    </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
                 
                 <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recursos<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/tareaPHP/web/misRecursosPublicados.php">Mis recursos publicados</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../web/crearRecurso.php">Crear nuevo recurso</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -64,17 +81,12 @@ require "loginModal.php";
             }
                 if(isset($_SESSION["nombre"]) && $_SESSION["esProveedor"]==false && ($_SESSION["idUsuario"]!=1)){    //si es cliente
 ?>
-                
-                <li><a href="/tareaPHP/web/misRecursosObtenidos.php">Ver mis recursos obtenidos</a></li>
-                <li><a href="/tareaPHP/web/verSuscripcion.php">Ver mi suscripción</a></li>
+                <ul class="nav navbar-nav">
+                    <li><a href="/tareaPHP/web/misRecursosObtenidos.php">Ver mis recursos obtenidos</a></li>
+                    <li><a href="/tareaPHP/web/verSuscripcion.php">Ver mi suscripción</a></li>
                 </ul>
                 
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
-                    </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
+                
                 
                 <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -92,9 +104,7 @@ require "loginModal.php";
                 if(isset($_SESSION["nombre"]) && $_SESSION["idUsuario"]==1){    //si es  administrador
 ?>
                 
-                
-                </ul>
-                
+               
                 <ul class="nav navbar-nav navbar-left">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listar<span class="caret"></span></a>
@@ -116,12 +126,7 @@ require "loginModal.php";
                     </li>
                 </ul>
                 
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Buscar recursos o proveedores">
-                    </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                </form>
+              
                 
                 <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -152,7 +157,42 @@ require "loginModal.php";
                                 });
                                 
                                 
-                                //datalist con ajax para el buscador, con evento keyup
+                                $('input[name=buscar]').on("input", function(){
+                                    var palabra = $('#name').val();
+                                    $.ajax({
+                                        type:"GET",
+                                        url: "/tareaPHP/ajax/inputBuscar.php",
+                                        data:{"palabra": palabra},
+                                        cache: false,
+                                        success:function(resp){
+                                            if(resp!=null){
+                                                
+                                                var lista = JSON.parse(resp);
+                                                var i;
+                                                
+                                                $('#busqueda').empty();
+                                                for(i=0; i<lista['proveedoresYrecursos'].length; i++){
+                                                    $('#busqueda').append('<option value="'+ lista['proveedoresYrecursos'][i] +'" label="'+ lista['tipos'][i] +'"></option>');
+                                                    
+                                                }
+                                                
+                                                
+                                            }
+                                            else{
+                                                $('#busqueda').append("<option>No hay resultados para mostrar</option>");
+                                            }
+                                        },
+                                        error: function(jqXHR, estado, error){
+                                            console.log(estado);
+                                            console.log(error);
+                                        },
+                                        complete: function(jqXHR, estado){
+                                                          console.log(estado);
+                                                        },
+                                        timeout: 10000
+                                    })
+
+                                });
                                 
                                 
                         });
