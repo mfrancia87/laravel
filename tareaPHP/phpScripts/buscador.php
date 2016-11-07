@@ -14,6 +14,10 @@ if($tipo == 'Proveedor'){
 if($tipo == 'Recurso'){
     header("location: ../web/verRecurso.php?id=$id");
 }
+if($tipo == 'Categoria'){
+    //echo "<h3>Esta es  una categoria</h3>";
+    header("location: ../web/verRecursosPorCategoria.php?id=$id");
+}
 else{
     echo "<h3>No se encontro lo que buscabas</h3>";
 }

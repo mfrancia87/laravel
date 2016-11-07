@@ -54,9 +54,34 @@ else{
 }
 
 
+$query3 = "SELECT nombre, id FROM categoria";
+$result3 = mysqli_query( $conexion, $query3 );
+$categorias = [];
+$idCategorias = [];
+if($result3){
+    if(mysqli_num_rows($result3)>0){
+        //devuelvo el array
+        while($tupla3 = mysqli_fetch_array($result3)){
+            array_push($categorias, $tupla3[0]);
+            array_push($idCategorias, $tupla3[1]);
+            array_push($tipos, "Categoria");
+        }
+    }
+    else{
+        $categorias = NULL;
+        $idCategorias = NULL;
+        $tipos = NULL;
+    }
+}
+else{
+    echo "Error aca: ". $query3 ."<br>" . mysqli_error($conexion);
+}
 
-$proveedoresYrecursos = array_merge($proveedores, $recursos);
-$ids = array_merge($idProveedores, $idRecursos);
+
+
+
+$proveedoresYrecursos = array_merge($proveedores, $recursos, $categorias);
+$ids = array_merge($idProveedores, $idRecursos, $idCategorias);
 
 $resultado = [];
 $resultado['proveedoresYrecursos'] = $proveedoresYrecursos;

@@ -107,12 +107,13 @@ if($datosProveedor != NULL){
         <div class="panel-body">
         <?php
             echo "<h3>"."$datosProveedor[1]"." aún no ha agregado ningún recurso</h3>";
-        }
+        
         ?>
         </div>
     </div>
 
 <?php
+        }
 }
 else{
     echo "<h3>El proveedor seleccionado no existe. Inténtelo nuevamente</h3>";

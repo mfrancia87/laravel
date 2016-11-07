@@ -266,6 +266,48 @@ function listarProveedores($conexionBD){
     }
 }
 
+function getCategoriaById($conexionBD, $id){
+    $query = "SELECT nombre FROM categoria WHERE id='$id'";
+    $result = mysqli_query( $conexionBD, $query );
+    if($result){
+        //devuelvo el array
+        while($tupla = mysqli_fetch_array($result)){
+            return $tupla;
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
+
+
+
+function getRecursosByCategoriaId($conexionBD, $idCategoria){
+    $query = "SELECT idRecurso FROM recursoscategoria WHERE idCategoria='$idCategoria'";
+    $result = mysqli_query( $conexionBD, $query );
+    $idsRecursos = [];
+    if($result){
+        while($tupla = mysqli_fetch_array($result)){
+            array_push($idsRecursos, $tupla);
+        }
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);    }
+    $listaRecursos = [];
+    if($idsRecursos != NULL){
+        foreach ($idsRecursos as $id) {
+            $recurso = getRecursoById($conexionBD, $id[0]);
+            array_push($listaRecursos, $recurso);
+        }
+        return $listaRecursos;
+    }
+    else{
+        return NULL;    }
+}
+
+    
+
 function listarCategorias($conexionBD){
     $query = "SELECT * FROM categoria WHERE idCategoriaPadre IS NULL";
     $result = mysqli_query( $conexionBD, $query );
@@ -286,6 +328,22 @@ function listarCategorias($conexionBD){
 function encontrarCategoriasHojas($conexionBD){
     $categorias = [];
     $query = "SELECT * FROM categoria WHERE id NOT IN (SELECT DISTINCT idCategoriaPadre FROM categoria WHERE idCategoriaPadre IS NOT NULL)";
+    $resultado = mysqli_query($conexionBD, $query);
+    if($resultado){
+        while ($tupla = mysqli_fetch_array($resultado)){
+        array_push($categorias, $tupla);
+        }
+        return $categorias;
+    }
+    else{
+        echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+    }
+}
+
+//encuentra los hijos de una categoria dada por id
+function encontrarHijos($conexionBD, $id){
+    $categorias = [];
+    $query = "SELECT * FROM categoria WHERE idCategoriaPadre='$id'";
     $resultado = mysqli_query($conexionBD, $query);
     if($resultado){
         while ($tupla = mysqli_fetch_array($resultado)){
