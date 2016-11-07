@@ -10,6 +10,13 @@ $descripcion = filter_input(INPUT_POST, "descripcion");
 $tipoRecurso = filter_input(INPUT_POST, "tipoRecurso");
 $tipoPlan = filter_input(INPUT_POST, "plan");
 $checkbox = filter_input(INPUT_POST, "esDescargable");
+$listaCategorias = [];
+
+
+foreach($_POST['categoria'] as $check) {
+    array_push($listaCategorias, $check);
+}
+
 
 if(isset($checkbox)){
     $esDescargable = true;
@@ -20,12 +27,13 @@ else{
 
 
 //manejo de imagen
-$directorio = "/tareaPHP/img/recurso/";
+$directorio = "../img/recurso/";
 
-if(($_FILES["imagen"]["error"] > 0) || (!isset($_FILES["imagen"]))){
+if(($_FILES["imagen"]["error"] > 0) || ($_FILES['imagen']['error'] == UPLOAD_ERR_NO_FILE)){
     //echo "Error: " . $_FILES["imagen"]["error"] . "<br>";
-    $nombreImg = "default";
+    $nombreImg = "default.jpg";
 }
+
 else{
     $temp = explode(".", $_FILES["imagen"]["name"]);
     $nombreImg = round(microtime(true)) . '.' . end($temp);
@@ -40,7 +48,7 @@ else{
 //manejo de archivo
 if($_FILES["archivo"]["error"] > 0){
     echo "Error: " . $_FILES["archivo"]["error"] . "<br>";
-    header( "refresh:5;url=../index.php" );
+    //header( "refresh:5;url=../index.php" );
 }
 else{
     $directorioArchivo = "../archivos/recursos/";
@@ -52,14 +60,37 @@ else{
 $conexion = conectarBD();
 
 $datosRecurso = [];
-array_push($datosRecurso, $idProveedor, $nombre, $descripcion, $directorio, $nombreImg, $tipoRecurso, $tipoPlan, $esDescargable, $directorioArchivo, $nombreArchivo);
+$directorioImg = "/tareaPHP/img/recurso/";
+array_push($datosRecurso, $idProveedor, $nombre, $descripcion, $directorioImg, $nombreImg, $tipoRecurso, $tipoPlan, $esDescargable, $directorioArchivo, $nombreArchivo);
 
-if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg) && (move_uploaded_file($_FILES["archivo"]["tmp_name"], $directorioArchivo . $nombreArchivo))){
-    agregarRecurso($conexion, $datosRecurso);
+if($_FILES['imagen']['error'] == UPLOAD_ERR_NO_FILE){
+    if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $directorioArchivo . $nombreArchivo)){
+        agregarRecurso($conexion, $datosRecurso);
+        $idRecurso = mysqli_insert_id($conexion);
+        agregarCategoriasArecurso($conexion, $idRecurso, $listaCategorias);
+        
+        //agregado. redirijo a mis recursos publicados
+        header( "Location: ../index.php" );
+    }
+    else{
+        echo "<p>No se pudo subir el archivoooooo</p>";
+    }
 }
 else{
-    echo "<p>No se pudo subir el archivo</p>";
+    if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $directorio . $nombreImg) && (move_uploaded_file($_FILES["archivo"]["tmp_name"], $directorioArchivo . $nombreArchivo))){
+        agregarRecurso($conexion, $datosRecurso);
+        $idRecurso = mysqli_insert_id($conexion);
+        agregarCategoriasArecurso($conexion, $idRecurso, $listaCategorias);
+        
+        //agregado. redirijo a mis recursos publicados
+        header( "Location: ../index.php" );
+    }
+    else{
+        echo "<p>No se pudo subir el archivo</p>";
+    }
 }
+
+
 
 
 desconectarBD($conexion);

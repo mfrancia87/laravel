@@ -58,13 +58,15 @@ if($datosProveedor != NULL){
   </div>
 </div>
 
+<?php
+    if($recursosProveedor != NULL){
+?>
+
 <div class="panel panel-info">
         <div class="panel-heading">Recursos subidos por <strong><?php echo "$datosProveedor[1]" ?> </strong></div>
         <div class="panel-body">
 <div class="table-responsive">
-    <?php
-        if($recursosProveedor != NULL){
-    ?>
+    
     <table id="recursos" class="table table-bordered table-hover">
         <thead>
           <tr>

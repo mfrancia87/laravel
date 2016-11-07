@@ -282,27 +282,33 @@ function listarCategorias($conexionBD){
     }
 }
 
-
-function encontrarHijos($conexionBD, $idPadre){
-    $query = "SELECT * FROM categoria WHERE idCategoriaPadre = '$idPadre'";
-    $result = mysqli_query( $conexionBD, $query );
+//lista las categorias hojas (disponibles para elegir)
+function encontrarCategoriasHojas($conexionBD){
     $categorias = [];
-    if($result){
-        if(mysqli_num_rows($result)>0){
-            //devuelvo el array
-            while($tupla = mysqli_fetch_array($result)){
-                array_push($categorias, $tupla);
-            }
-            return $categorias;
+    $query = "SELECT * FROM categoria WHERE id NOT IN (SELECT DISTINCT idCategoriaPadre FROM categoria WHERE idCategoriaPadre IS NOT NULL)";
+    $resultado = mysqli_query($conexionBD, $query);
+    if($resultado){
+        while ($tupla = mysqli_fetch_array($resultado)){
+        array_push($categorias, $tupla);
         }
-        else{
-            return NULL;
-        }
+        return $categorias;
     }
     else{
         echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
     }
 }
+
+//agrega las categorias del recurso
+function agregarCategoriasArecurso($conexionBD, $idRecurso, $listaCategorias){
+    for($i=0; $i<count($listaCategorias); $i++){
+        $query = "INSERT INTO recursoscategoria (idRecurso, idCategoria) VALUES ('$idRecurso', '$listaCategorias[$i]')";
+        $resultado = mysqli_query($conexionBD, $query);
+        if(!$resultado){
+            echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
+        }
+    }
+}
+
 
 //lista los recursos de determinado proveedor
 function listarRecursos($conexion, $idProveedor){
@@ -386,10 +392,7 @@ function agregarRecurso($conexionBD, $datosRecurso){
     $query = "INSERT INTO recurso (idProveedor, nombre, descripcion, imagen, tipoRecurso, tipoPlan, esDescargable, archivo) VALUES ('$datosRecurso[0]', '$datosRecurso[1]', '$datosRecurso[2]', '$datosRecurso[3]$datosRecurso[4]', '$datosRecurso[5]', '$datosRecurso[6]', '$datosRecurso[7]', '$datosRecurso[8]$datosRecurso[9]')";
 
     $result = mysqli_query($conexionBD, $query );
-        if($result){
-            //agregado. redirijo a inicio
-            header( "Location: ../web/misRecursosPublicados.php" );
-        }else{
+        if(!$result){
             echo "Error aca: ". $query ."<br>" . mysqli_error($conexionBD);
         }
 }

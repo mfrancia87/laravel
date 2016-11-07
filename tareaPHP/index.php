@@ -40,7 +40,7 @@ if($listaRecursos != NULL){
             <div class="panel-body">
         
                 <div class="form-group" style="width: 80%; margin: auto;">
-                  <img style="display: block; margin: auto" src="<?php echo $recurso[4] ?>" height="100px" class="img-rounded" align="middle">
+                  <img style="display: block; width: 100%; margin: auto" src="<?php echo $recurso[4] ?>" height="100px" class="img-rounded" align="middle">
                 </div>
         
           <div class="form-group">

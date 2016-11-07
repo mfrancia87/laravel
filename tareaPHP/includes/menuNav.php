@@ -1,20 +1,6 @@
 <?php
 require "loginModal.php";
 
-/*
-require "operacionesBD.php";
-
-$conexion = mysqli_connect("localhost", "root", "root", "tareaphp");
-
-
-$proveedores = listarProveedores($conexion);
-
-
-$recursos = listarTodosRecursos($conexion);
-
-
-$resultado = array_merge($proveedores, $recursos);
-*/
 
 ?>
 
@@ -32,12 +18,15 @@ $resultado = array_merge($proveedores, $recursos);
         
             
                 <div class="navbar-form navbar-left">
-                    <div class="form-group">
+                    <form class="form-group" method="post" action="/tareaPhp/phpScripts/buscador.php">
                       <input list="busqueda" type="text" class="form-control" name="buscar" placeholder="Buscar recursos o proveedores">
                       <datalist id="busqueda">
                           
                       </datalist>
-                    </div>
+                      <input type="hidden" name="id" value="">
+                      <input type="hidden" name="tipo" value="">
+                      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </form>
                     
                 </div>
 <?php
@@ -49,7 +38,6 @@ $resultado = array_merge($proveedores, $recursos);
             
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/tareaPHP/web/registro.php">Registro</a></li>
-                <!--    <li><a href="/tareaPHP/web/login.php">Login</a></li>    -->
                     <li><a data-toggle="modal" data-target="#modal-login" style="cursor: pointer;">Login</a></li>
                 </ul>
 <?php
@@ -63,7 +51,7 @@ $resultado = array_merge($proveedores, $recursos);
                     <ul class="dropdown-menu">
                         <li><a href="/tareaPHP/web/misRecursosPublicados.php">Mis recursos publicados</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="../web/crearRecurso.php">Crear nuevo recurso</a></li>
+                        <li><a href="/tareaPHP/web/crearRecurso.php">Crear nuevo recurso</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -158,11 +146,10 @@ $resultado = array_merge($proveedores, $recursos);
                                 
                                 
                                 $('input[name=buscar]').on("input", function(){
-                                    var palabra = $('#name').val();
+                                    
                                     $.ajax({
                                         type:"GET",
                                         url: "/tareaPHP/ajax/inputBuscar.php",
-                                        data:{"palabra": palabra},
                                         cache: false,
                                         success:function(resp){
                                             if(resp!=null){
@@ -172,14 +159,12 @@ $resultado = array_merge($proveedores, $recursos);
                                                 
                                                 $('#busqueda').empty();
                                                 for(i=0; i<lista['proveedoresYrecursos'].length; i++){
-                                                    $('#busqueda').append('<option value="'+ lista['proveedoresYrecursos'][i] +'" label="'+ lista['tipos'][i] +'"></option>');
+                                                    $('#busqueda').append('<option value="'+ lista['proveedoresYrecursos'][i] +'" label="'+ lista['tipos'][i] +'" data-id="' + lista['ids'][i] +'"></option>');
                                                     
                                                 }
-                                                
-                                                
                                             }
                                             else{
-                                                $('#busqueda').append("<option>No hay resultados para mostrar</option>");
+                                                $('#busqueda').append('<option value="No hay resultados para mostrar"></option>');
                                             }
                                         },
                                         error: function(jqXHR, estado, error){
@@ -194,6 +179,15 @@ $resultado = array_merge($proveedores, $recursos);
 
                                 });
                                 
+                                $('input[name=buscar]').on("change", function(){
+                                    var id = $("#busqueda option[value='" + $('input[name=buscar]').val() + "']").attr('data-id');
+                                    var tipo = $("#busqueda option[value='" + $('input[name=buscar]').val() + "']").attr('label');
+                                    
+                                    $('input[name=id]').attr("value", id);
+                                    $('input[name=tipo]').attr("value", tipo);
+                                });
+                                
+                               
                                 
                         });
                 </script>

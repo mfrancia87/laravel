@@ -3,7 +3,10 @@ session_start();
 require '../includes/header.php';
 
 require '../includes/menuNav.php';
+require '../includes/operacionesBD.php';
 
+$conexion = conectarBD();
+$listaCat = encontrarCategoriasHojas($conexion);
 ?>
 
 
@@ -29,8 +32,30 @@ require '../includes/menuNav.php';
         <label for="descripcion">Descripción</label>
         <textarea class="form-control" rows="5" name="descripcion" required></textarea>
     </div>
+    
+    <?php
+    if(!empty($listaCat)){
+    ?>
+    <div class="checkbox">
+        <legend style="font-family: rockwell; font-size: 15px; font-weight: bold;">Elija la/s categoría/s</legend>
+    <?php
+        foreach ($listaCat as $categoria) {
+    ?>
+    
+        <label style="float: left; display: inline-block; padding-right: 4px;"><input name="categoria[]" type="checkbox" value="<?php echo $categoria[0] ?>"><?php echo $categoria[1];?></label>
+    
+    <?php 
+        }
+    ?>
+    </div>
+    <?php
+    }
+    ?>
+    
+    <br><br><br>
+    
     <div class="form-group">
-        <label for="plan">Disponible para plan:</label>
+        <label for="plan" >Disponible para plan:</label>
         <select class="form-control" name="plan">
             <option value="free">Free</option>
             <option value="silver">Silver</option>
