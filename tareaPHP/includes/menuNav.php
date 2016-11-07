@@ -19,7 +19,7 @@ require "loginModal.php";
             
                 <div class="navbar-form navbar-left">
                     <form class="form-group" method="post" action="/tareaPhp/phpScripts/buscador.php">
-                      <input list="busqueda" type="text" class="form-control" name="buscar" placeholder="Buscar recursos o proveedores">
+                        <input id="buscarInput" list="busqueda" type="text" class="form-control" name="buscar" placeholder="buscar categorías, recursos o proveedores">
                       <datalist id="busqueda">
                           
                       </datalist>
@@ -135,6 +135,39 @@ require "loginModal.php";
 </nav>
 
 
+<!-- modal -->
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="barra"></div>
+                <button type="button" class="close" data-dismiss="modal" >
+                    <span aria-hidden="true" style="color: white; opacity: 1;">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h3 class="modal-title" id="modal-login-label">Login</h3>
+                <p>Ingrese su nombre de usuario y contraseña:</p>
+            </div>
+            <div class="modal-body">
+                <span class="label" id="errorLogin"></span>
+                <form id="loginForm" method="post" action="" >
+                    
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="nick">Nick:</label>
+                        <input id="nickLogin" type="text" class="form-control" name="nick" required autofocus>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label for="pass">Contraseña:</label>
+                        <input id="passLogin" type="password" class="form-control" name="password" required>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button id="loginBtn" type="submit" class="btn btn-success" style="float: right;">Login</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div> <!-- modal -->
+
 
 
 <!-- script para el modal -->
@@ -187,7 +220,43 @@ require "loginModal.php";
                                     $('input[name=tipo]').attr("value", tipo);
                                 });
                                 
-                               
+                                //login
+                                
+                                $('#loginForm').on("submit", function(){
+                                    
+                                    var nick = $('#nickLogin').val();
+                                    var pass = $('#passLogin').val();
+                                    console.log(nick);
+                                    console.log(pass);
+                                    $.ajax({
+                                        type:"POST",
+                                        url: "/tareaPHP/ajax/login.php",
+                                        data: {
+                                            "nick" : nick,
+                                            "pass" : pass
+                                        },
+                                        async:false,
+                                        success:function(resp){
+                                            if(resp=="true"){
+                                                console.log("OK");
+                                            }
+                                            else{
+                                                $('#errorLogin').html("Nick o password incorrectos").css({"background-color":"red", "color":"white"});
+            
+                                            }
+                                        },
+                                        error: function(jqXHR, estado, error){
+                                            console.log(estado);
+                                            console.log(error);
+                                        },
+                                        complete: function(jqXHR, estado){
+                                                          console.log(estado);
+                                                        },
+                                        timeout: 10000
+                                    })
+
+                                });
+                                
                                 
                         });
                 </script>
@@ -201,6 +270,17 @@ require "loginModal.php";
         transition: all 0.3s ease;
 }
 
+#buscarInput{
+    width: 220px;
+    border: 2px solid blue;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#buscarInput::-webkit-input-placeholder {
+    font-family: Helvetica;
+    font-size: 9px;
+}
 
 
 </style>

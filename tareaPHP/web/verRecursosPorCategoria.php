@@ -11,9 +11,7 @@ $conexion = conectarBD();
 
 $categoria = getCategoriaById($conexion, $idCategoria);
 
-
 $listaRecursos = getRecursosByCategoriaId($conexion, $idCategoria);
-//$listaRecursos = NULL;
 
 if($listaRecursos != NULL){
 ?>

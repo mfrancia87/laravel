@@ -324,7 +324,7 @@ function listarCategorias($conexionBD){
     }
 }
 
-//lista las categorias hojas (disponibles para elegir)
+//lista las categorias hojas
 function encontrarCategoriasHojas($conexionBD){
     $categorias = [];
     $query = "SELECT * FROM categoria WHERE id NOT IN (SELECT DISTINCT idCategoriaPadre FROM categoria WHERE idCategoriaPadre IS NOT NULL)";

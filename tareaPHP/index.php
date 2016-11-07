@@ -48,7 +48,7 @@ if($listaRecursos != NULL){
               <input type="text" class="form-control" name="tipoPlan" value="<?php echo $recurso[6]; ?>" readonly>
           </div>
             </div>
-            <button class="btn btn-danger center-block"><a style="text-decoration: none; color: white; white-space: normal;" href="/tareaPHP/web/verRecurso.php?id=<?php echo $recurso[0]; ?>">Ver recurso</a></button>
+            <a class="btn btn-danger center-block" style="text-decoration: none; color: white; white-space: normal; margin: 0 10px;" href="/tareaPHP/web/verRecurso.php?id=<?php echo $recurso[0]; ?>">Ver recurso</a>
             
             
         </div>
