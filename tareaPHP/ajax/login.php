@@ -22,7 +22,9 @@ if(count(mysqli_num_rows($resultado))==1){
             $_SESSION["email"]=$tupla["email"];
             $_SESSION["esProveedor"]=$tupla["esProveedor"];
             $_SESSION["plan"]=$tupla["tipoPlan"];
+            
             echo "true";
+            
         }
         else{
             echo "false";

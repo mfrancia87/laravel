@@ -19,7 +19,7 @@ require "loginModal.php";
             
                 <div class="navbar-form navbar-left">
                     <form class="form-group" method="post" action="/tareaPhp/phpScripts/buscador.php">
-                        <input id="buscarInput" list="busqueda" type="text" class="form-control" name="buscar" placeholder="buscar categorías, recursos o proveedores">
+                        <input id="buscarInput" list="busqueda" type="text" class="form-control" name="buscar" placeholder="Buscar">
                       <datalist id="busqueda">
                           
                       </datalist>
@@ -37,6 +37,7 @@ require "loginModal.php";
                 
             
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/tareaPHP/phpScripts/enviarMail.php">Mandar mail</a></li> <!-- BORRAR -->
                     <li><a href="/tareaPHP/web/registro.php">Registro</a></li>
                     <li><a data-toggle="modal" data-target="#modal-login" style="cursor: pointer;">Login</a></li>
                 </ul>
@@ -222,12 +223,11 @@ require "loginModal.php";
                                 
                                 //login
                                 
-                                $('#loginForm').on("submit", function(){
-                                    
+                                $('#loginForm').on("submit", function(e){
+                                    e.preventDefault();
                                     var nick = $('#nickLogin').val();
                                     var pass = $('#passLogin').val();
-                                    console.log(nick);
-                                    console.log(pass);
+                                    
                                     $.ajax({
                                         type:"POST",
                                         url: "/tareaPHP/ajax/login.php",
@@ -239,10 +239,14 @@ require "loginModal.php";
                                         success:function(resp){
                                             if(resp=="true"){
                                                 console.log("OK");
+                                                window.location.href = "/tareaPhp/index.php";
                                             }
                                             else{
-                                                $('#errorLogin').html("Nick o password incorrectos").css({"background-color":"red", "color":"white"});
-            
+                                                $('#nickLogin').val("");
+                                                $('#passLogin').val("");
+                                                
+                                                $('#errorLogin').html("Nick y/o password incorrectos.").css({"background-color":"red", "color":"white"});
+                                                
                                             }
                                         },
                                         error: function(jqXHR, estado, error){
@@ -279,7 +283,7 @@ require "loginModal.php";
 
 #buscarInput::-webkit-input-placeholder {
     font-family: Helvetica;
-    font-size: 9px;
+    font-size: 15px;
 }
 
 

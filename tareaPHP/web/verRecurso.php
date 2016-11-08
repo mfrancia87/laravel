@@ -50,6 +50,7 @@ if($recurso != NULL){
     </div>
     <input name="idRecurso" type="hidden" value="<?php echo $recurso[0]; ?>">
     <input name="idProveedor" type="hidden" value="<?php echo $recurso[1]; ?>">
+    <input name="esDescargable" type="hidden" value="<?php echo $recurso[7]; ?>"
     <input name="link" type="hidden" value="<?php echo $recurso[8]; ?>">
     <?php
     if(isset($_SESSION["idUsuario"])){
@@ -60,25 +61,26 @@ if($recurso != NULL){
     }
     
     if(isset($_SESSION["idUsuario"]) && $_SESSION["idUsuario"]!=1){
-        if(!$yaLoCompro){
+        if(!$yaLoCompro){   //si no lo ha comprado
     ?>
       <button type="submit" class="btn btn-success">Obtener recurso</button>     
     <?php 
+        }
+        if($yaLoCompro && $recurso[7]==1){  //si lo compró y es descargable
+          ?>
+          <button class="btn btn-success pull-right"><a style="text-decoration: none; color: white;" href="<?php echo $recurso[8];?>" download>Descargar</a></button>
+    <?php
+        }
+        if($yaLoCompro && $recurso[7]==0){  //si lo compró y no es descargable
+          ?>
+          <a class="btn btn-success pull-right" style="text-decoration: none; color: white; white-space: normal; width: 200px;" href="/tareaPHP/web/vistaPreviaRecurso.php?id=<?php echo $idRecurso; ?>">Ver recurso online</a>
+    <?php
         }
       }
     ?>
       
   </div>
   </form>
-      <?php
-      if($yaLoCompro){
-          ?>
-          <button class="btn btn-success pull-right"><a style="text-decoration: none; color: white;" href="<?php echo $recurso[8];?>" download>Descargar</a></button>
-      <?php
-          }
-      ?>
-      
-      
   </div>
 </div>
 <?php

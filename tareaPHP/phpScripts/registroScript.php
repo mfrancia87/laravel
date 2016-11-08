@@ -49,8 +49,7 @@ else{
 
         $result = mysqli_query( $conexion, $query );
             if($result){
-                //agregado. redirijo a inicio
-                header( "Location: ../index.php" );
+                header( "Location: enviarMail.php?email=$email&nombre=$nombre&tipo=cliente" );
             }else{
                 echo "Error aca: ". $query ."<br>" . mysqli_error($conexion);
             }
@@ -68,7 +67,7 @@ else{
                 $query2 = "INSERT INTO proveedor (idUsuario, nombreEmpresa, linkEmpresa) VALUES ('$idUsuario', '$nombreEmpresa', '$linkEmpresa')";
                 $result2 = mysqli_query( $conexion, $query2 );
                 if($result2){
-                    header( "Location: ../index.php" );
+                    header( "Location: enviarMail.php?email=$email&nombre=$nombre&tipo=proveedor" );
                 }
                 else{
                     die("Error aca: ". $query2 ."<br>" . mysqli_error($conexion));

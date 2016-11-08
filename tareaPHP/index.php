@@ -6,6 +6,40 @@ require 'includes/header.php';
 require 'includes/menuNav.php';
 require 'includes/operacionesBD.php';
  
+?>
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px;">
+
+  <!-- imagenes -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+        <img src="img/sitio/1.jpg" alt="imagen 1">
+    </div>
+
+    <div class="item">
+        <img src="img/sitio/2.jpg" alt="imagen 2">
+    </div>
+
+    <div class="item">
+        <img src="img/sitio/3.jpg" alt="imagen 3">
+    </div>
+  </div>
+
+  <!-- controles -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previa</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Siguiente</span>
+  </a>
+</div>
+
+
+
+<?php
 /*
 if(isset($_SESSION["nombre"])){
     echo "<h2>Bienvenido ".$_SESSION["nombre"]."</h2>";
@@ -48,7 +82,7 @@ if($listaRecursos != NULL){
               <input type="text" class="form-control" name="tipoPlan" value="<?php echo $recurso[6]; ?>" readonly>
           </div>
             </div>
-            <a class="btn btn-danger center-block" style="text-decoration: none; color: white; white-space: normal; margin: 0 10px;" href="/tareaPHP/web/verRecurso.php?id=<?php echo $recurso[0]; ?>">Ver recurso</a>
+            <a class="btn btn-success center-block" style="text-decoration: none; color: white; white-space: normal; margin: 0 10px;" href="/tareaPHP/web/verRecurso.php?id=<?php echo $recurso[0]; ?>">Ver recurso</a>
             
             
         </div>
@@ -79,11 +113,3 @@ desconectarBD($conexion);
 require 'includes/footer.php';
 
 ?>
-
-<style>
-
-.panel-heading{
-    font-family: Impact !important;
-}
-    
-</style>
