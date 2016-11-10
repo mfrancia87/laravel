@@ -37,7 +37,6 @@ require "loginModal.php";
                 
             
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/tareaPHP/phpScripts/enviarMail.php">Mandar mail</a></li> <!-- BORRAR -->
                     <li><a href="/tareaPHP/web/registro.php">Registro</a></li>
                     <li><a data-toggle="modal" data-target="#modal-login" style="cursor: pointer;">Login</a></li>
                 </ul>

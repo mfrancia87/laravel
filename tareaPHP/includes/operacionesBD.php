@@ -510,6 +510,29 @@ function verificarCompraRecurso($conexionBD, $idCliente, $idRecurso){
     }
 }
 
+function enviarMailCompraRecurso($conexionBD, $idRecurso, $idCliente){
+    
+    $cliente = getUsuarioById($conexionBD, $idCliente);
+    $recurso = getRecursoById($conexionBD, $idRecurso);
+
+    $titulo = "Compra de recurso en Taller PHP";
+
+    $mensaje = "<html><body style='height: 230px; width: 80%; margin: auto; font-family: rockwell; border: 4px double green; border-radius: 10px; padding: 5px 10px;'>".
+            "<h1 style='text-align: center; background-color: green; color: white;'>Hola $cliente[4]</h1>".
+            "<h2>Usted ha comprado el recurso $recurso[2] en Taller PHP 2016.</h2>".
+            "<h2>¡Gracias por confiar en nosotros!</h2>".
+            "<h3>Lo saluda atentamente:</h3>".
+            "<h3>El equipo de desarrollo de PHP</h3>".
+            "<a href='http://localhost/tareaPHP/index.php'><button style='background-color: green; font-family: Arial Black; border-radius: 10px; cursor: pointer; color: white; width: 200px'>Ir a la plataforma</button></a>".
+            "</body></html>";
+
+    $cabezal = 'MIME-Version: 1.0' . "\r\n";
+    $cabezal .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $cabezal .= 'From: Tarea PHP <tareaphp2016@gmail.com>' . "\r\n";
+
+    mail($cliente[2], $titulo, $mensaje, $cabezal);
+   
+}
 
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);

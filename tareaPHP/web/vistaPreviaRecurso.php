@@ -12,13 +12,8 @@ $conexion = conectarBD();
 $datosRecurso = getRecursoById($conexion, $idRecurso);
 $idProveedor = $datosRecurso[1];
 
-$yaLoCompro = verificarCompraRecurso($conexion, $idCliente, $idRecurso);
-
 if($datosRecurso != NULL){
-  if(!$yaLoCompro){
-      comprarRecurso($conexion, $idCliente, $idRecurso, $idProveedor);
-  }
-  
+
   if($datosRecurso[5]=="articulo" || $datosRecurso[5]=="libro" || $datosRecurso[5]=="revista"){
 ?>
 
