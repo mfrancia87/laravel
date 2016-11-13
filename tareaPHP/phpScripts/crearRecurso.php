@@ -17,12 +17,9 @@ foreach($_POST['categoria'] as $check) {
     array_push($listaCategorias, $check);
 }
 
-
+$esDescargable = 0;
 if(isset($checkbox)){
-    $esDescargable = true;
-}
-else{
-    $esDescargable = false;
+    $esDescargable = 1;
 }
 
 

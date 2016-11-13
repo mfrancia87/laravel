@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 //si no está logueado
 if(!isset($_SESSION["idUsuario"])){
     header("Location: ../index.php");
