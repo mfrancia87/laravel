@@ -1,5 +1,11 @@
 <?php 
  session_start();
+ 
+ //si no está logueado o si el usuario no es admin
+if(!isset($_SESSION["idUsuario"]) || $_SESSION["idUsuario"]!=1){
+    header("Location: ../index.php");
+}
+ 
  require '../includes/header.php';
 
  require '../includes/menuNav.php';
@@ -116,8 +122,25 @@ if($datosProveedor != NULL){
         }
 }
 else{
-    echo "<h3>El proveedor seleccionado no existe. Inténtelo nuevamente</h3>";
-    header( "refresh:5;url=listarProveedores.php" );
+?>  
+    <div class="panel panel-danger">
+        <div class="panel-heading">Error en cliente:</div>
+        <div class="panel-body">
+            <h2>El proveedor seleccionado no existe. Inténtelo nuevamente</h2>
+            <h3>Redirigiendo a lista de proveedores...</h3>
+        </div>
+      </div>
+<script>
+$(function(){
+    var delay = 4000; //milisegundos
+    var pagina = "listarProveedores.php";
+    setTimeout(function(){ 
+        window.location = pagina; 
+    }, delay);
+});
+</script>
+
+<?php    
 }
 
 

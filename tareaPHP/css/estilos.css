@@ -102,7 +102,7 @@ table{
 
 .panel{
     background-color: #ffffff;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .panel-heading{
@@ -117,7 +117,7 @@ table{
 
 .panel-body{
     background-color: #ffffff;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 img{

@@ -60,7 +60,8 @@ if($recurso != NULL){
     <?php
     }
     
-    if(isset($_SESSION["idUsuario"]) && $_SESSION["idUsuario"]!=1){
+    //si no esta logueado y es cliente o admin
+    if(isset($_SESSION["idUsuario"]) && $_SESSION["esProveedor"]!=1){
         if(!$yaLoCompro){   //si no lo ha comprado
     ?>
       <button type="submit" class="btn btn-success">Obtener recurso</button>     
@@ -77,8 +78,12 @@ if($recurso != NULL){
     <?php
         }
       }
+      if(!isset($_SESSION["idUsuario"])){   //si no esta logueado
     ?>
-      
+      <a class="btn btn-success pull-right" style="text-decoration: none; color: white; white-space: normal; width: 200px;" href="/tareaPHP/web/registro.php">¡Registrarme y descargar!</a>    
+    <?php
+      }
+    ?>
   </div>
   </form>
   </div>

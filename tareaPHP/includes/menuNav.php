@@ -19,7 +19,7 @@ require "loginModal.php";
             
                 <div class="navbar-form navbar-left">
                     <form class="form-group" method="post" action="/tareaPhp/phpScripts/buscador.php">
-                        <input id="buscarInput" list="busqueda" type="text" class="form-control" name="buscar" placeholder="Buscar">
+                        <input id="buscarInput" list="busqueda" type="text" class="form-control" name="buscar" placeholder="Buscar" required>
                       <datalist id="busqueda">
                           
                       </datalist>

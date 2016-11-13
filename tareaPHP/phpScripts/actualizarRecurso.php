@@ -11,12 +11,11 @@ $tipoRecurso = filter_input(INPUT_POST, "tipoRecurso");
 $tipoPlan = filter_input(INPUT_POST, "plan");
 $checkbox = filter_input(INPUT_POST, "esDescargable");
 
+$esDescargable = 0;
 if(isset($checkbox)){
-    $esDescargable = true;
+    $esDescargable = 1;
 }
-else{
-    $esDescargable = false;
-}
+
 
 $conexion = conectarBD();
 

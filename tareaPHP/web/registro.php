@@ -1,7 +1,17 @@
-<?php require '../includes/header.php';
+<?php 
 
- require '../includes/menuNav.php';
-?>
+ session_start();
+ 
+ //si está logueado
+if(isset($_SESSION["idUsuario"])){
+    header("Location: ../index.php");
+}
+
+require '../includes/header.php';
+require '../includes/menuNav.php';
+
+ ?>
+
 
 <div class="panel panel-info">
   <div class="panel-heading">Registro</div>

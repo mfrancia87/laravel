@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+//si no está logueado o si no es administrador
+if(!isset($_SESSION["idUsuario"]) || $_SESSION["idUsuario"]!=1){
+    header("Location: ../index.php");
+}
+
+
 require '../includes/header.php';
 
 require '../includes/menuNav.php';

@@ -1,6 +1,12 @@
 <?php 
 
 session_start();
+
+//si no está logueado o si no es cliente
+if(!isset($_SESSION["idUsuario"]) || $_SESSION["esProveedor"]!=0){
+    header("Location: ../index.php");
+}
+
 require '../includes/header.php';
 require '../includes/menuNav.php';
          
@@ -59,3 +65,7 @@ $gold = "<span><strong><h3>GOLD</h3></strong><h5>$preciosPlanes[2] USD por mes</
         });
     });
 </script>
+
+<?php
+
+require '../includes/footer.php';

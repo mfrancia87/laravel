@@ -1,13 +1,28 @@
 <?php 
  session_start();
- require '../includes/header.php';
+ 
+ //si no está logueado o si no es proveedor
+if(!isset($_SESSION["idUsuario"]) || $_SESSION["esProveedor"]!=1){
+    header("Location: ../index.php");
+}
 
- require '../includes/menuNav.php';
- require '../includes/operacionesBD.php';
+
+require '../includes/operacionesBD.php';
  
 $idRecurso = filter_input(INPUT_GET, "id");
 $conexion = conectarBD();
 $datosRecurso = getRecursoById($conexion, $idRecurso);
+
+//si el proveedor logueado no es el mismo que el dueño del recurso a editar
+if($_SESSION["idUsuario"] != $datosRecurso[1]){
+    header("Location: ../index.php");
+}
+ 
+
+
+require '../includes/header.php';
+require '../includes/menuNav.php';
+
 if($datosRecurso != NULL){
 ?>
 
@@ -17,7 +32,7 @@ if($datosRecurso != NULL){
     
   <form method="post" action="../phpScripts/actualizarRecurso.php" enctype="multipart/form-data">
   
-      <input type="hidden" class="form-control" name="id" value="<?php echo $datosRecurso[0]; ?>">
+  <input type="hidden" class="form-control" name="id" value="<?php echo $datosRecurso[0]; ?>">
   <div class="col-lg-4 col-sm-4 col-xs-12">
         <div class="form-group">
             <img style="display: block; margin: auto" src="<?php echo $datosRecurso[4] ?>" height="200px" class="img-rounded" align="middle">
@@ -52,8 +67,7 @@ if($datosRecurso != NULL){
     <div class="checkbox">
         <label><input name="esDescargable" type="checkbox" value="si">Es descargable</label>
     </div>
-  
-      <button type="submit" class="btn btn-success">Actualizar</button>
+    <button type="submit" class="btn btn-success">Actualizar</button>
   </div>
     
       
@@ -63,7 +77,15 @@ if($datosRecurso != NULL){
 <?php
 }
 else{
-    echo "No hay nada";
+?>
+      <div class="panel panel-danger">
+        <div class="panel-heading">Error:</div>
+        <div class="panel-body">
+            <h3>No se puede encontrar el recurso</h3>
+            <h5>Inténtelo nuevamente</h5>
+        </div>
+      </div>
+<?php
 }
 
 

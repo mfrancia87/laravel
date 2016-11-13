@@ -31,7 +31,7 @@ if($planRecurso == "free" || $planCliente == "gold" || strcmp($planRecurso, $pla
           <div class="panel-heading">Obtener recurso:</div>
           <div class="panel-body">
               <h3>Recurso obtenido</h3>
-              <h5>Aquí está su link <?php echo $link; ?></h5>
+              <h5>Aquí está su descarga <?php echo $link; ?></h5>
               <button class="btn btn-success"><a style="text-decoration: none; color: white;" href="<?php echo $recurso[8];?>" download>Descargar</a></button>
           </div>
         </div>
@@ -43,7 +43,7 @@ if($planRecurso == "free" || $planCliente == "gold" || strcmp($planRecurso, $pla
           <div class="panel-heading">Obtener recurso:</div>
           <div class="panel-body">
               <h3>Recurso obtenido</h3>
-              <span class="label label-warning">Este recurso no es descargable</span>
+              <span class="label label-warning" style="font-size: 20px;">Este recurso no es descargable</span>
               <h5>Aquí está su link</h5>
               <a class="btn btn-success center-block" style="text-decoration: none; color: white; white-space: normal; margin: 0 10px; width: 200px;" href="/tareaPHP/web/vistaPreviaRecurso.php?id=<?php echo $idRecurso; ?>">Ver recurso online</a>
           </div>

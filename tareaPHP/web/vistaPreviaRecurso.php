@@ -1,16 +1,30 @@
 <?php 
  session_start();
- require '../includes/header.php';
-
- require '../includes/menuNav.php';
- require '../includes/operacionesBD.php';
+ 
+//si no está logueado o si no es cliente
+if(!isset($_SESSION["idUsuario"]) || $_SESSION["esProveedor"]!=0){
+    header("Location: ../index.php");
+}
+ 
+require '../includes/operacionesBD.php';
 
 $idRecurso = filter_input(INPUT_GET, "id");
 $idCliente = $_SESSION["idUsuario"];
 $conexion = conectarBD();
 
+$yaLoCompro = verificarCompraRecurso($conexion, $idCliente, $idRecurso);
+
+//si no compro el recurso al que quiere acceder y no es admin
+if(!$yaLoCompro && $_SESSION["idUsuario"]!=1){
+    header("Location: ../index.php");
+}
+
 $datosRecurso = getRecursoById($conexion, $idRecurso);
 $idProveedor = $datosRecurso[1];
+
+require '../includes/header.php';
+require '../includes/menuNav.php';
+
 
 if($datosRecurso != NULL){
 
@@ -78,7 +92,25 @@ if($datosRecurso != NULL){
   }
 }
 else{
-    echo "No hay nada";
+?>    
+    <div class="panel panel-danger">
+        <div class="panel-heading">Recurso inexistente:</div>
+        <div class="panel-body">
+            <h2>El recurso seleccionado no existe. Inténtelo nuevamente</h2>
+            <h3>Redirigiendo a inicio...</h3>
+        </div>
+      </div>
+<script>
+$(function(){
+    var delay = 4000; //milisegundos
+    var pagina = "../index.php";
+    setTimeout(function(){ 
+        window.location = pagina; 
+    }, delay);
+});
+</script>
+
+<?php    
 }
 
 

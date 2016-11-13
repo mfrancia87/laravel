@@ -1,5 +1,11 @@
 <?php
 
+//si no está logueado
+if(!isset($_SESSION["idUsuario"])){
+    header("Location: ../index.php");
+}
+
+
 $recurso = filter_input(INPUT_GET, "rec");
 
 ?>

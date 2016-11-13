@@ -36,5 +36,7 @@ else{
 }
 
 actualizarUsuarioByNick($conexion, $datosUsuario);
+$_SESSION["nick"]= $nick;
+$_SESSION["email"]= $email;
 
 desconectarBD($conexion);
