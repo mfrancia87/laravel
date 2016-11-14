@@ -3,8 +3,8 @@
 //requires
 require '../includes/operacionesBD.php';
 
-$nick = filter_input(INPUT_POST, "nick");
-$password = filter_input(INPUT_POST, "pass");
+$nick = validarInput(filter_input(INPUT_POST, "nick"));         //agregado validarInput
+$password = validarInput(filter_input(INPUT_POST, "pass"));     //agregado validarInput
 
 $conexion = conectarBD();
 

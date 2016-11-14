@@ -3,9 +3,9 @@
 //requires
 require '../includes/operacionesBD.php';
 
-$nick = filter_input(INPUT_POST, "nick");
+$nick = validarInput(filter_input(INPUT_POST, "nick"));     //agregado validarInput
 $email = filter_input(INPUT_POST, "email");
-$password = filter_input(INPUT_POST, "password");
+$password = validarInput(filter_input(INPUT_POST, "password"));     //agregado validarInput
 $nombre = filter_input(INPUT_POST, "nombre");
 $apellido = filter_input(INPUT_POST, "apellido");
 $fechaNacimiento = date('Y-m-d', strtotime($_POST['fechaNac']));

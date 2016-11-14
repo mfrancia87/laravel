@@ -1,6 +1,9 @@
 <?php
 
-
+function validarInput($formData) {
+    $input = trim( stripslashes( htmlspecialchars( $formData  ) ) );
+    return $input;
+}
 
 function conectarBD(){
     $servidor = "localhost";
@@ -533,6 +536,7 @@ function enviarMailCompraRecurso($conexionBD, $idRecurso, $idCliente){
     mail($cliente[2], $titulo, $mensaje, $cabezal);
    
 }
+
 
 function desconectarBD($conexionBD){
     mysqli_close($conexionBD);
